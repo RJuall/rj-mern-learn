@@ -44,3 +44,16 @@ Object: A collection of name/value pairs (JavaScript)
 
 It's just that simple.
 
+#### Global Execution Context
+
+Creates a global object and `this` variable by the JS engine
+
+The Global object in browsers is the window object, which is what `this` refers to by default
+
+Global: "Not inside a function"
+
+When variables and functions are created outside of a function, they are attached to the global object (window)
+
+The execution context: Global Object, `this`, the Outer Environment, code that is written
+
+There is no outer environment at the global level
