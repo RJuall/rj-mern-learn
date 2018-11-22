@@ -57,3 +57,19 @@ When variables and functions are created outside of a function, they are attache
 The execution context: Global Object, `this`, the Outer Environment, code that is written
 
 There is no outer environment at the global level
+
+#### The Execution Context: Creation and 'Hoisting'
+
+Variables and functions are 'hoisted' to the top of the javascript file so they can be used throughout the code...?
+
+But that doesn't hold exactly for variables, they are declared, but not assigned...?
+
+Execution context is created in two phases: creation phase and execution phase
+
+During the creation phase memory space is set up for variables and functions (Hoisting)
+
+While the entire function is placed into memory space during creation phase, variables are assigned during execution
+
+In creation phase variables are hoisted and set to `undefined`
+
+Thus, bad to rely on hoisting--write code in the order that you need it
