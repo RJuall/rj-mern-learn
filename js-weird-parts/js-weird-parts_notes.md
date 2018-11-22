@@ -127,3 +127,38 @@ What the outer environment of the function is has to do with its lexical environ
 A function will follow outer environment references all the way down to the global environment to find a variable--this is the Scope Chain
 
 Can think about when functions are created
+
+#### Scope, ES6, and `let`
+
+Scope: Where a variable is available in code, and if it's truly the _same_ variable or a new copy
+
+`let` is a different way of declaring variables compared to `var`
+
+`let` creates variables in block scope
+
+While the variables declared with `let` are still created in memory the same way as `var`, they cannot be called before they are instantiated--they will not return `undefined` in that instance, it will throw an error
+
+`let` variables are only available in the block they are created, as defined by `{}`
+
+#### Asynchronous Callbacks
+
+Asynchronous: More than one at a time
+
+How does JS handle asynchronous events, being, itself, synchronous
+
+The browser is running all sorts of code simultaneously while running the JS engine
+
+Event Queue
+
+JS looks at the event queue once the execution stack is empty
+
+So, JS just runs through its normal code and looks for events once its done. That's how JS handles asynchronous events.
+
+JS handles those events in the order they happen
+
+#### Types and JavaScript
+
+Dynamic Typing: Variables are not specified to be a particular type, their types are figured out during execution
+
+As opposed to static typing, where variable types are specified before execution/compilation
+
