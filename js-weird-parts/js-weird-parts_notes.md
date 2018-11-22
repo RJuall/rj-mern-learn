@@ -118,3 +118,12 @@ Related to the idea of scope
 
 #### The Scope Chain
 
+When looking for a variable in JS a function does not just look in its own variable environment
+
+Each execution also has a reference to its outer environment. That outer environment does not have to be the environment directly below it in the execution stack.
+
+What the outer environment of the function is has to do with its lexical environment--at what level it is defined
+
+A function will follow outer environment references all the way down to the global environment to find a variable--this is the Scope Chain
+
+Can think about when functions are created
