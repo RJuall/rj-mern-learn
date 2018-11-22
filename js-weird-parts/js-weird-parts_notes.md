@@ -162,3 +162,47 @@ Dynamic Typing: Variables are not specified to be a particular type, their types
 
 As opposed to static typing, where variable types are specified before execution/compilation
 
+#### Primitive Types
+
+Primitive Type: A type of data that represents a single value (Not an object)
+
+`undefined`: A lack of existence
+
+`null`: Also a lack of existence
+
+Unlike `undefined`, `null` is OK to use by programmers. (Both are able to be used by programmers, but `undefined` is intended to be that the value has not been set by the JS engine)
+
+`boolean`: `true` or `false` 
+
+`number`: Only one numeric type in JS. All numbers are floating-point numbers--this can make math in JS strange
+
+`string`: A sequence of characters, denoted either by single- or double-quotes.
+
+`symbol`: Used in ES6.
+
+http://exploringjs.com/es6/ch_symbols.html
+
+Created by `mySymbol = Symbol('mySymbol')`
+
+Used as unique property keys, never clashes with any other property key (symbol or string).
+
+Can be used as constants representing concepts:
+
+```javascript
+const COLOR_RED = Symbol('Red');
+const COLOR_GREEN = Symbol('Green');
+...
+
+function getComplement(color) {
+    switch (color) {
+        case COLOR_RED:
+            return COLOR GREEN;
+        case COLOR_GREEN:
+            return COLOR_RED;
+        ...
+        default:
+            throw new Exception('Unknown color: '+color);
+    }
+}
+```
+
