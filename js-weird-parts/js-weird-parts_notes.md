@@ -108,3 +108,13 @@ Nested functions add to the top of the stack
 
 Once functions complete, they are popped off of the stack
 
+#### Functions, Context, and Variable Environments
+
+Variable Environment: Where variables live and how they relate to each other in memory
+
+Every function has its own variable environment & its own memory space for its variables
+
+Related to the idea of scope
+
+#### The Scope Chain
+
