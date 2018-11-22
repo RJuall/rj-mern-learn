@@ -73,3 +73,18 @@ While the entire function is placed into memory space during creation phase, var
 In creation phase variables are hoisted and set to `undefined`
 
 Thus, bad to rely on hoisting--write code in the order that you need it
+
+#### Undefined
+
+What does `undefined` mean?
+
+'not defined' and 'undefined' are not equal
+
+`undefined` is a special JS value that means a variable has not been set
+
+can `var x === undefined`
+
+can `var x = undefined`
+
+Never set `var x = undefined` -> will be difficult to debug because not known, then, who set the var to undefined
+
