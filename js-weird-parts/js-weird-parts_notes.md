@@ -88,3 +88,23 @@ can `var x = undefined`
 
 Never set `var x = undefined` -> will be difficult to debug because not known, then, who set the var to undefined
 
+#### Code Execution
+
+After creation phase, code executed in order its written
+
+#### Single Threaded, Synchronous Execution
+
+Single Threaded: One command at a time (Maybe not that under the hood of the browser)
+
+Synchronous: One at a time, in order
+
+#### Function Invocation and The Execution Stack
+
+Invocation: Running a function/Calling a function. In JS, with `()`
+
+Execution Context placed on top of the execution stack. On top is what's running
+
+Nested functions add to the top of the stack
+
+Once functions complete, they are popped off of the stack
+
