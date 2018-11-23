@@ -206,3 +206,15 @@ function getComplement(color) {
 }
 ```
 
+#### Operators
+
+Operator: A special function that is syntactically (written) differently, generally take two parameters and return a specific result
+
+Two parameter operations are written in infix notation
+
+#### Operator Precedence and Associativity
+
+Precedence: Which function gets called first. Functions are called in order of precedence (Higher precedence wins)
+
+Associativity: What order operator functions get called in: L->R or R->L (When functions have the same precedence)
+
