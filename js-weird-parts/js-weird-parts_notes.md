@@ -228,3 +228,17 @@ Unintended coercion can be the cause of many bugs in JS
 
 #### Comparison Operators
 
+`3 < 2 < 1` converts to `true` because the `<` comparison operator has L->R associativity. So, `3 < 2` is `false` and `false < 1` is `true` because `false` converts to `0`
+
+It isn't always obvious what some values will convert to. `undefined` is `NaN` (when attempting to convert to number), but `null` is `0`
+
+The double equals `==` operator will coerce value in attempting to decide if the two values are the same
+
+`null == 0` is `false` for some reason
+
+Coercion behavior seen as a major downside of the JS language
+
+`===` and `!==` are strict equality and strict inequality operators. They do not attempt coercion between the values.
+
+99% of the time use strict equality/inequality operators. Be aware of the implications of the double equals operator
+
