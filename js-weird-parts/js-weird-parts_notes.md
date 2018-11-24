@@ -220,3 +220,11 @@ Associativity: What order operator functions get called in: L->R or R->L (When f
 
 #### Coercion
 
+Coercion: Converting a value from one type to another type
+
+This happens quite often in JS because it is dynamically typed
+
+Unintended coercion can be the cause of many bugs in JS
+
+#### Comparison Operators
+
