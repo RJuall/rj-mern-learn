@@ -285,3 +285,16 @@ The `||` operator behavior can be used to avoid collisions in variable names by 
 ### Objects and Functions
 
 #### Objects and the Dot
+
+In JS: Objects and functions are very related--perhaps the same subject entirely
+
+Objects in JS: Name/Value pairs
+
+Objects can have primitives (property), objects (property), functions (method)
+
+"Computed Member Access" Operator == `[]`
+
+In an object CMA == `Object["Something"]`
+
+"Member Access" Operator == `.`
+
