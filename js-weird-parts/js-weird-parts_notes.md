@@ -4,6 +4,8 @@
 
 ### 11/21/2018
 
+### Getting Started
+
 #### Introduction
 
 Understand the programming language, don't just copy code
@@ -11,6 +13,8 @@ Understand the programming language, don't just copy code
 JavaScript has its own mode and design decisions, it's not necessarily like the programming languages it might resemble
 
 It's not enough to know JS frameworks; it's important to know vanilla JS
+
+### Execution Contexts and Lexical Environments
 
 #### Syntax Parsers
 
@@ -156,6 +160,8 @@ So, JS just runs through its normal code and looks for events once its done. Tha
 
 JS handles those events in the order they happen
 
+### Types and Operators
+
 #### Types and JavaScript
 
 Dynamic Typing: Variables are not specified to be a particular type, their types are figured out during execution
@@ -267,3 +273,15 @@ The `||` operator returns the value that can be coerced to true, if available
 This trick can be used to provide a default value for a function parameter (if value not provided (the left value), the `||` operator will return the right value.
 
 i.e. `paramVal = param || default`
+
+#### Framework Aside: Default Values
+
+Linking different javascript files in a project essentially puts all those files inot one contiguous script file. This is how JS treats those links
+
+This means that there can be collisions between the script files if they use the same variable names, etc.
+
+The `||` operator behavior can be used to avoid collisions in variable names by checking to see if a variable name is already being used.
+
+### Objects and Functions
+
+#### Objects and the Dot
