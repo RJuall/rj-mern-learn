@@ -242,3 +242,13 @@ Coercion behavior seen as a major downside of the JS language
 
 99% of the time use strict equality/inequality operators. Be aware of the implications of the double equals operator
 
+#### Existence and Booleans
+
+Coercion is useful for checking is a variable has been set, etc.
+
+i.e. `if (var) { ... }`
+
+If `0` is a valid value for the variable, then there will be a problem, as `0` is `false`
+
+#### Default Values
+
