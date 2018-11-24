@@ -320,3 +320,24 @@ Namespace: A container for variables and functions, typically to keep variables 
 
 JS does not have namespaces as a language feature, but because of the JS object syntax namespaces are not needed.
 
+#### JSON and Object Literals
+
+JSON = JavaScript Object Notation
+
+JSON is inspired by Object literal notation, but they are not the same thing
+
+XML used to be the default way to pass around information on the web, now JSON
+
+XML wasted too much bandwidth
+
+JSON is just a string of data, looks like JS objects
+
+BUT JSON property names (keys) have to wrapped in quotes
+
+JSON is a _subset_ of the JS object literal syntax
+
+All JSON is valid object literal syntax in JS
+
+JS has built-in utilities to deal with JSON
+
+#### Functions are Objects
