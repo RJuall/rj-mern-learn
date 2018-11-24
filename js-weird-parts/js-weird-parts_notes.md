@@ -298,3 +298,21 @@ In an object CMA == `Object["Something"]`
 
 "Member Access" Operator == `.`
 
+#### Objects and Object Literals
+
+In JS there is often more than one way to do something
+
+Object literal: `var obj = new Object();` == `var obj = {}`
+
+The object literal is not a function
+
+JS is very liberal about white space
+
+Object literal notation is the preferred way to create objects in JS
+
+Object literals can be used as parameter arguments in function calls, creating objects on the fly
+
+Object literal syntax is very powerful and can be used to write clean, well-defined code
+
+#### Framework Aside: Faking Namespaces
+
