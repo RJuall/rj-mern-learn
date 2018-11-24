@@ -316,3 +316,7 @@ Object literal syntax is very powerful and can be used to write clean, well-defi
 
 #### Framework Aside: Faking Namespaces
 
+Namespace: A container for variables and functions, typically to keep variables and functions with the same name separate.
+
+JS does not have namespaces as a language feature, but because of the JS object syntax namespaces are not needed.
+
