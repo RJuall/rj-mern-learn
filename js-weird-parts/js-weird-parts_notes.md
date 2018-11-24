@@ -252,3 +252,18 @@ If `0` is a valid value for the variable, then there will be a problem, as `0` i
 
 #### Default Values
 
+JS will not bark at you if function parameters are not provided
+
+`undefined` will be coerced (to a string) to `"undefined"`
+
+The `||` operator returns the value that can be coerced to true, if available
+
+`0 || 1` returns `1`
+
+`1 || 2` returns `1`
+
+`false || "Hello"` returns `"Hello"`
+
+This trick can be used to provide a default value for a function parameter (if value not provided (the left value), the `||` operator will return the right value.
+
+i.e. `paramVal = param || default`

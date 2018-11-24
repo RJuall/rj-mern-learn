@@ -5,3 +5,13 @@ if (a || a === 0) {
 } else {
     console.log("Nothing");
 }
+
+function greet(name) {
+    name = name || '<Your name here>';
+    console.log ('Hello ' + name);
+}
+
+greet('Rob');
+
+greet();
+
