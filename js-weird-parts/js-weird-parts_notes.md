@@ -218,3 +218,5 @@ Precedence: Which function gets called first. Functions are called in order of p
 
 Associativity: What order operator functions get called in: L->R or R->L (When functions have the same precedence)
 
+#### Coercion
+
