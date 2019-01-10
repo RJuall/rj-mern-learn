@@ -368,3 +368,13 @@ Functional programming!
 
 #### Conceptual Aside: By Value vs By Reference
 
+Primitive values are passed by value (a copy is made)
+
+Objects are passed by reference (no copy)
+
+Mutate: To change something
+
+The equals operator sets up new memory space
+
+#### Objects, Functions, and `this`
+
