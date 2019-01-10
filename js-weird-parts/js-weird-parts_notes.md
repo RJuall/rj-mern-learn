@@ -356,3 +356,15 @@ Imperative to keep in mind that JS functions are OBJECTS
 
 #### Function Statements and Function Expressions
 
+Expression: A unit of code that results in a value
+
+Statements just do work, expressions result in a value
+
+Function expressions are not hoisted, as in when functions are assigned to a variable: `var fn = function() {...};`
+
+Functions can be passed to other functions.
+
+Functional programming!
+
+#### Conceptual Aside: By Value vs By Reference
+
