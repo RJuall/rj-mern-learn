@@ -394,3 +394,23 @@ The `let` keyword is intended also to smooth these difficulties.
 
 #### Arrays - Collections of Anything
 
+Since JS is dynamically typed, arrays can hold collections of any kinds of data, which also do not have to be consistent within the array.
+
+```javascript
+var arr = [
+    1,
+    false,
+    {
+        name: 'Rob',
+        address: '111 Main St',
+    },
+    function(name) {
+        var greeting  = 'Hello';
+        console.log(greeting + name);
+    },
+    "HELLO"
+];
+```
+
+#### 'arguments' and Spread
+
