@@ -378,3 +378,19 @@ The equals operator sets up new memory space
 
 #### Objects, Functions, and `this`
 
+When a function is run an execution context is created. It has a variable environment where its variables live. It has a reference to its outer lexical environment--where it sits physically in the code, and it creates the `this` variable.
+
+`this` will point to different things based on how the function is called.
+
+When a function is created in the global namespace the `this` variable is set to the global namespace
+
+When a method is invoked the `this` variable refers to the object that contains the method.
+
+A function created within an object will still have `this` refer to the global object.
+
+`var self = this;` can be used to smooth inconsistencies in what `this` can refer to within an object. Essentially by setting `self` to a stable `this` reference (usually a containing object)
+
+The `let` keyword is intended also to smooth these difficulties.
+
+#### Arrays - Collections of Anything
+
