@@ -414,3 +414,19 @@ var arr = [
 
 #### 'arguments' and Spread
 
+When a function is executed and its execution context is created, the `arguments` keyword is also created
+
+Arguments: The parameters you pass to a function
+
+The `arguments` keyword contains all of the arguments passed into a function
+
+JS does not care if parameters specified in a fn signature are passed into a fn or not. It will still run.
+
+The `arguments` keyword is "array-like" in that it acts like an array, but lacks some of the features of a JS array.
+
+The `spread` operator is an improved method of addressing function parameters in JS.
+
+The `spread` operator is `...`
+
+#### Function Overloading
+
