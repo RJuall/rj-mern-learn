@@ -342,3 +342,17 @@ JS has built-in utilities to deal with JSON
 
 #### Functions are Objects
 
+The concept of "first class functions" is key to understanding JS
+
+First Class Functions: Everything that can be done with other data types can also be done with functions. i.e. Assign them to variables, pass them around, or create them on the fly.
+
+Functions can have attached primitives, objects, or other functions, since functions are just objects.
+
+Functions have two special object properties: a name and code
+
+A function name is optional, functions can be anonymous
+
+Imperative to keep in mind that JS functions are OBJECTS
+
+#### Function Statements and Function Expressions
+
