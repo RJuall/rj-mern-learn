@@ -466,3 +466,50 @@ greetSpanish('John', 'Doe');
 
 #### Syntax Parsers
 
+The syntax parser reads the written code and makes sure it conforms to the specifications of the language.
+
+The JS engine includes a syntax parser.
+
+#### Automatic Semicolon Insertion
+
+The syntax parser in JS attempts to be helpful by automatically inserting semicolons where it expects to see one.
+
+This is why use of semicolons is "optional" in JS
+
+Rule #1: Always use semicolons where you want them to be.
+
+Do not count on the syntax parser to do what you want it to do
+
+#### Whitespace
+
+Whitespace: Invisible characters that create literal 'space' in your written code. i.e. carriage returns, tabs, spaces.
+
+JS is very liberal about accepting whitespace.
+
+```javascript
+var 
+    // first name of person
+    firstname, 
+    
+    // last name of person
+    lastname, 
+    
+    // the language
+    // can be 'en' or 'es'
+    language;
+
+var person = {
+
+    // the first name
+    firstname: 'John',
+
+    // the last name
+    // (always required)
+    lastname: 'Doe'
+}
+
+console.log(person);
+```
+
+#### Immediately Invoked Function Expresssions (IIFE)
+
