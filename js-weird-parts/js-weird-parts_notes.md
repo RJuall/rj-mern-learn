@@ -536,3 +536,20 @@ var greeting = function(name) {
 
 #### IIFEs and Safe Code
 
+IIFEs create their own execution contexts, which avoids polluting the global context
+
+In many libraries and functions all the code is wrapped in an IIFE in order to protect the code from interfering or interfering with other code.
+
+The global context can be passed into a function if needed, as so:
+
+```javascript
+// IIFE
+(function(global, name) {
+    var greeting = 'Hello';
+    global.greeting = 'Hello';
+    console.log(greeting + ' ' + name);
+}(window, 'Rob'));
+```
+
+#### Understanding Closures
+
