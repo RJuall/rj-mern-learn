@@ -582,3 +582,74 @@ Closure is a language feature
 
 #### Understanding Closures Part 2
 
+```javascript
+function buildFunctions() {
+    var arr = [];
+    for (var i = 0; i < 3; i++) {
+        arr.push(
+            function() {
+                console.log(i);
+            }
+        )
+    }
+    return arr;
+}
+
+var fs = buildFunctions();
+
+fs[0]();
+fs[1]();
+fs[2]();
+```
+
+Given the code above, the `fs` array functions will always return `3` because the functions are invoked at the bottom of the code, when `i === 3`, which was the exit condition for the loop. Closure keeps the `i` variable in memory so that the `fs` functions can access the `i` variable, but its value was set in the loop which created the function code in memory--where the functions are NOT invoked.
+
+Variables that are outside a function that the function still has access to are also known as free variables.
+
+```javascript
+// The ES6 method of achieving `0 1 2` with the previous code
+function buildFunctions2() {
+    var arr = [];
+    for (var i = 0; i < 3; i++) {
+        let j = i;
+        arr.push(
+            function() {
+                console.log(j);
+            }
+        )
+    }
+    return arr;
+}
+
+var fs2 = buildFunctions2();
+
+fs2[0]();
+fs2[1]();
+fs2[2]();
+```
+
+```javascript
+// The ES5 method of achieving `0 1 2` with the original code
+function buildFunctions3() {
+    var arr = [];
+    for (var i = 0; i < 3; i++) {
+        arr.push(
+            (function(j) {
+                return function() {
+                    console.log(j);
+                }
+            }(i))
+        )
+    }
+    return arr;
+}
+
+var fs3 = buildFunctions3();
+
+fs3[0]();
+fs3[1]();
+fs3[2]();
+```
+
+#### Function Factories
+
