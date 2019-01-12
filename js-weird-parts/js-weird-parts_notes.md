@@ -553,3 +553,32 @@ The global context can be passed into a function if needed, as so:
 
 #### Understanding Closures
 
+Closures are vital to understanding JS
+
+```javascript
+function greet(whatToSay) {
+    return function(name) {
+        console.log(whatToSay + ' ' + name);
+    }
+}
+
+greet('Hi')('Rob');
+
+var sayHi = greet('Hi');
+sayHi('Robbo');
+```
+
+Given the preceding code, how is it that the `sayHi` function still knows about the `whatToSay` variable, since the function that referenced that variable executed in creating the `sayHi` variable function?
+
+The answer is closures
+
+Though the `greet` function's execution context is popped off of the stack after it executes, the memory allocated for its variables, etc. still exists & the `sayHi` variable function references those values. 
+
+The JS engine ensures that the referenced memory stays available
+
+This concept of enclosing all the memory that an execution context requires, making sure that proper scope is kept intact, is known as a closure
+
+Closure is a language feature
+
+#### Understanding Closures Part 2
+
