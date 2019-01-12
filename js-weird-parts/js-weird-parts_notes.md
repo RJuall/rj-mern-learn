@@ -513,3 +513,26 @@ console.log(person);
 
 #### Immediately Invoked Function Expresssions (IIFE)
 
+Function statements begin with the `function` keyword
+
+Function expressions are set to variables, for example
+
+```javascript
+// Using an Immediately Invoked Function Expression (IIFE)
+var greeting = function(name) {
+    console.log('Hello ' + name);
+}('Robbito');
+
+// IIFE as a standalone fn expression
+// Parens are necessary to tell the syntax parser
+//  that the fn is an expression not a statement
+(function(name) {
+    console.log('Hello ' + name);
+}('Rabbit'));
+
+// The above also works with the invocation
+//  outside the wrapping parens
+```
+
+#### IIFEs and Safe Code
+
