@@ -710,3 +710,74 @@ tellMeWhenDone(function() {
 
 #### Call(), Apply(), and Bind()
 
+`call()`, `apply()`, and `bind()` are related to the `this` variable
+
+In addition to the special properties of having a name and invocable code, functions have access to the special `call()`, `apply()`, and `bind()` methods.
+
+`bind()` can be used to specify an execution context for the `this` variable by creating a copy of the object with a new `this` variable value.
+
+```javascript
+// The functions below use the bind method
+//    to specify that this refers to the person
+//    object and not the global object
+var person = {
+    firstname: 'John',
+    lastname: 'Doe',
+    getFullName: function() {
+        var fullname = this.firstname + ' ' + this.lastname;
+        return fullname;
+    }
+}
+
+var logName = function(lang1, lang2) {
+    console.log('Logged: ' + this.getFullName());
+}
+
+var logName2 = function(lang1, lang2) {
+    console.log('Logged: ' + this.getFullName());
+}.bind(person)
+
+var logPersonName = logName.bind(person);
+
+// logName();
+logPersonName();
+logName2(person);
+```
+
+A function can be invoked using the `call()` method, opposed to simply using parens. The first argument of the `call()` method specifies the execution context for the `this` variable, the remaining arguments are passed to the function normally.
+
+The `call()` method: `logName.call(person, 'en', 'es');`
+
+The `apply()` method acts almost identically to the `call()` method, except that it expects the function arguments in the form of an array. It is otherwise identical to `call()`
+
+The `apply()` method: `logName.apply(person, ['en', 'es']);`
+
+Arrays can be more useful, especially in the case of mathematics, numbers, and a variable number of arguments.
+
+```javascript
+// Function borrowing
+// Using the person object above
+var person2 = {
+    firstname: 'Jane',
+    lastname: 'Doe'
+};
+
+console.log(person.getFullName.apply(person2));
+```
+
+```javascript
+// Function currying
+// Uses bind to create a copy of the
+//   multiply function where the a argument
+//   is permanently set to 2
+// This technique does not change the this variable context
+function multiply(a, b) {
+    return a * b;
+}
+
+var multipleByTwo = multiply.bind(this, 2);
+console.log('Mult by 2: ' + multipleByTwo(10));
+```
+
+Function Currying: Creating a copy of a function, but with some preset parameters. Very useful in mathematical situations.
+
