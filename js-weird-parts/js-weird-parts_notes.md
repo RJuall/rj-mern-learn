@@ -781,3 +781,75 @@ console.log('Mult by 2: ' + multipleByTwo(10));
 
 Function Currying: Creating a copy of a function, but with some preset parameters. Very useful in mathematical situations.
 
+#### Functional Programming
+
+JS has much in common with functional programming languages such as Lisp, Schema, Haskell, etc.
+
+Functions should not mutate data in a functional programming paradigm, instead return something new.
+
+Using functional programming paradigms is a good way of unlocking JS's power in relation to other programming languages.
+
+```javascript
+var arr1 = [1,2,3];
+console.log(arr1);
+
+var arr2 = [];
+for (var i = 0; i < arr1.length; i++) {
+    arr2.push(arr1[i] * 2);
+}
+console.log(arr2);
+
+// Functional programming uses first-order functions
+//   to accomplish work, by passing functions into
+//   other functions, for example.
+function mapForEach(arr, fn) {
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+        newArr.push(
+            fn(arr[i])
+        );
+    };
+    return newArr;
+}
+
+var arr3 = mapForEach(arr1, function(item) {
+    return item * 2;
+});
+
+// The mapForEach fn can do all sorts of different
+//   kinds of work on an array, as the work fn
+//   is provided as an argument. This makes it
+//   very flexible.
+var arr4 = mapForEach(arr1, function(item) {
+    return item > 2;
+});
+
+console.log(arr1);
+console.log(arr3);
+console.log(arr4);
+
+var checkPastLimit = function(limiter, item) {
+    return item > limiter;
+}
+
+// By using the ability of bind to set argument values,
+//   a fn with more than one required arg can be passed
+//   and used effectively in the mapForEach fn.
+var arr5 = mapForEach(arr1, checkPastLimit.bind(this, 1));
+console.log(arr5);
+
+// By refactoring checkPastLimit to return a fn,
+//   the fn can be made simpler and will not require that
+//   bind() be called frequently throughout the code.
+var checkPastLimit2 = function(limiter) {
+    return function(limiter, item) {
+        return item > limiter;
+    }.bind(this, limiter);
+};
+
+var arr6 = mapForEach(arr1, checkPastLimit2(1));
+console.log(arr6);
+```
+
+#### Functional Programming Part 2
+
