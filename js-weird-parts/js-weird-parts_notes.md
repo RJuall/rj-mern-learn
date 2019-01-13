@@ -678,3 +678,35 @@ Each time `makeGreeting()` is called it creates a new execution context which ca
 
 #### Closures and Callbacks
 
+`setTimeout()` is a good example of using closures and function expressions. In the following code `setTimeout` takes a function expression as its first parameter and that function logs a variable external to itself. JS closures are what preserves that scope chain, allowing the function expression to reference that variable external to its local scope, even though the variable's own local scope had long since ceased to exist. Without closures, `setTimeout` would not function as it does.
+
+```javascript
+function sayHiLater() {
+    var greeting = 'Hi.';
+
+    setTimeout(function() {
+        console.log(greeting);
+    }, 3000);
+}
+
+sayHiLater();
+```
+
+Callback Function: A function you give to another function, to be run when the other function is finished. (So the function you call (i.e. invoke), 'calls back' by calling the function you gave it when it finishes.)
+
+```javascript
+// Example of a callback function
+function tellMeWhenDone(callback) {
+    var a = 1000; // some work
+    var b = 2000; // some other work
+
+    callback(); // the 'callback', it runs the function I give it
+}
+
+tellMeWhenDone(function() {
+    console.log('I am done.');
+});
+```
+
+#### Call(), Apply(), and Bind()
+
