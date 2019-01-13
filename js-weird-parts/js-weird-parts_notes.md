@@ -653,3 +653,28 @@ fs3[2]();
 
 #### Function Factories
 
+JS closures allow for 'function factories' such as the following:
+
+```javascript
+function makeGreeting(language) {
+    return function(firstname, lastname) {
+        if (language === "en") {
+            console.log("Hello " + firstname + ' ' + lastname);
+        }
+        if (language === "es") {
+            console.log("Hola " + firstname + ' ' + lastname);
+        }
+    }
+}
+
+var greetEnglish = makeGreeting('en');
+var greetSpanish = makeGreeting('es');
+
+greetEnglish('Rob', 'Juall');
+greetSpanish('Rob', 'Juall');
+```
+
+Each time `makeGreeting()` is called it creates a new execution context which can then lead to encapsulation by variables, etc. of different variable values, `'en'` or `'es'` in this case.
+
+#### Closures and Callbacks
+
