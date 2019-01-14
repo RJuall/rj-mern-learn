@@ -861,3 +861,11 @@ How can functional programming be used to create better, easier to understand, e
 
 #### Classical v. Prototypal Inheritance
 
+Inheritance: One object gets access to the properties and methods of another object.
+
+Classical Inheritance: As in Java/C#. The way inheritance has been done historically. Not the only method and not without its downsides. Verbose. Can be complicated.
+
+Prototypal Inheritance: Simple, flexible, extensible, easy to understand. Used by JS.
+
+#### Understanding the Prototype
+
