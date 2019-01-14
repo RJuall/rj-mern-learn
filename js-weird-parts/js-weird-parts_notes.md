@@ -917,3 +917,33 @@ For example, the prototype of an array object is the array prototype, which has 
 
 #### Reflection and Extend
 
+Reflection: An object can look at itself, listing and changing its properties and methods.
+
+```javascript
+  // The underscore extend function that mimics inheritance
+  _.extend = createAssigner(_.allKeys);
+
+  // The guts of the underscore extend function
+  // An internal function for creating assigner functions.
+  var createAssigner = function(keysFunc, undefinedOnly) {
+    return function(obj) {
+      var length = arguments.length;
+      if (length < 2 || obj == null) return obj;
+      for (var index = 1; index < length; index++) {
+        var source = arguments[index],
+            keys = keysFunc(source),
+            l = keys.length;
+        for (var i = 0; i < l; i++) {
+          var key = keys[i];
+          if (!undefinedOnly || obj[key] === void 0) obj[key] = source[key];
+        }
+      }
+      return obj;
+    };
+  };
+```
+
+ES6 has an `extends` keyword that sets the prototype
+
+#### Function Constructors, 'new', and the History of JS
+
