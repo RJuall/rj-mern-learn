@@ -947,3 +947,26 @@ ES6 has an `extends` keyword that sets the prototype
 
 #### Function Constructors, 'new', and the History of JS
 
+The `new` keyword is an artifact of the effort to attract Java developers to JavaScript.
+
+The `new` keyword is an operator that creates an empty object and then invokes the function following the `new` operator
+
+Function Constructors: A normal function that is used to construct objects. The `this` variable pointss to a new empty object and that object is returned from the function automatically.
+
+```javascript
+// Playing with function constructors
+function Person(firstname, lastname) {
+    console.log(this);
+    this.firstname = firstname;
+    this.lastname = lastname;
+    console.log('This function is invoked');
+}
+
+var john = new Person('John', 'Doe');
+console.log(john);
+var jane = new Person('Jane', 'Doe');
+console.log(jane);
+```
+
+#### Function Constructors and `.prototype`
+
