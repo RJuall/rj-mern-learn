@@ -853,3 +853,11 @@ console.log(arr6);
 
 #### Functional Programming Part 2
 
+The Underscore.js annotated code can be used to learn some of these advanced JS concepts.
+
+Underscore is wrapped as an IIFE
+
+How can functional programming be used to create better, easier to understand, easily extensible code?
+
+#### Classical v. Prototypal Inheritance
+
