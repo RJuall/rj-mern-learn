@@ -907,3 +907,13 @@ console.log(jane.getFullname()); // Jane Default
 
 #### Everything is an Object (Or a Primitive)
 
+EVERYTHING in JS that is not a primitive is an object
+
+The object prototype is the base prototype that everthing ultimately inherits from (except primitives).
+
+Object prototype itself has no prototype. It is the base.
+
+For example, the prototype of an array object is the array prototype, which has methods that every specific array has access to. The prototype of the array prototype is the object prototype, which also has methods that all objects (and, thus, arrays) have access to. The prototype of the object prototype is null.
+
+#### Reflection and Extend
+
