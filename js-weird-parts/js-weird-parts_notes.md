@@ -869,3 +869,41 @@ Prototypal Inheritance: Simple, flexible, extensible, easy to understand. Used b
 
 #### Understanding the Prototype
 
+All JS objects have a prototype property that is its prototype.
+
+Prototypes can also have their own prototypes.
+
+Prototypes create a prototype chain, which can be seen as analogous to the scope chain.
+
+Objects can share the same prototypes. All objects can have the same prototype, even.
+
+```javascript
+// Examples of how prototypal
+//   inheritance works in JS
+var person = {
+    firstname: 'Default',
+    lastname: 'Default',
+    getFullname: function() {
+        return this.firstname + ' ' + this.lastname;
+    }
+}
+
+var john = {
+    firstname: 'John',
+    lastname: 'Doe'
+}
+
+// Don't do this EVER!
+// For demo purposes only!
+john.__proto__ = person;
+console.log(john.getFullname()); // John Doe
+
+var jane = {
+    firstname: 'Jane'
+}
+jane.__proto__ = person;
+console.log(jane.getFullname()); // Jane Default
+```
+
+#### Everything is an Object (Or a Primitive)
+
