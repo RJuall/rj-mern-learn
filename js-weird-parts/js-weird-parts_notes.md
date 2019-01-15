@@ -1055,3 +1055,41 @@ Better to use the standard `for` loop with arrays.
 
 #### Object.create and Pure Prototypal Inheritance
 
+The `Object.create()` method creates an object with the prototype being an object passed into the method.
+
+This is an example of pure prototypal inheritance. Objects are created using other objects as their prototypes and the details can be overridden after creation.
+
+The prototypal object can be changed later.
+
+Polyfill: Code that adds a feature which the engine may lack
+
+```javascript
+// Polyfill
+if (!Object.create) {
+    Object.create = function(o) {
+        if (arguments.length > 1) {
+            throw new Error('Object.create implementation'
+            + ' only accepts the first parameter.');
+        }
+        function F() {}
+        F.prototype = o;
+        return new F();
+    };
+}
+
+var person = {
+    firstname: 'Default',
+    lastname: 'Default',
+    greet: function() {
+        return 'Hi ' + this.firstname;
+    }
+}
+
+var john = Object.create(person);
+john.firstname = 'John';
+john.lastname = 'Doe';
+console.log(john);
+```
+
+#### ES6 and Classes
+
