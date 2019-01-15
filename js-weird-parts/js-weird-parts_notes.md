@@ -1153,3 +1153,15 @@ The `typeof` function will work as expected for functions as well, returning "fu
 
 #### Strict Mode
 
+The `"use strict";` flag tells the JS engine to be less lax with the rules of JS.
+ 
+The `"use strict";` flag must be used at the top of a JS file or at the top of a function, which would then be the only thing subject to the stricter rules.
+
+One thing that is then enforces is that a variable must be explicitly declared before it can be set.
+
+Not every JS engine implements `"use strict";` in the same way, thus it is not 100% reliable.
+
+Concatenating and minifying a number of JS files can be affected by the use of `"use strict";` in the first file.
+
+#### Learning from Other's Good Code
+
