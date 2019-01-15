@@ -1007,3 +1007,9 @@ console.log(john.getFormalFullName());
 
 #### 'new' and Functions
 
+Omitting the `new` operator when attempting to use the function constructor will result in unintended behavior, i.e. setting the variable to `undefined`
+
+Using the convention of capitalizing functions intended to be executed via the function constructor can help avoid errors.
+
+#### Built-In Function Constuctors
+
