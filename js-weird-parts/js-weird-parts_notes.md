@@ -1093,3 +1093,19 @@ console.log(john);
 
 #### ES6 and Classes
 
+A JS class defines an object.
+
+ES6 classes are not identical to classes in other programming languages.
+
+In JS classes are objects.
+
+The `extends` keywords sets the prototype.
+
+The `super` keyword accesses the prototype's properties and methods.
+
+The JS class syntax still uses the JS prototypal inheritance system.
+
+Syntactic Sugar: A different way to type something that doesn't change how it works under the hood.
+
+#### Initialization
+
