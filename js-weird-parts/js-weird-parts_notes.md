@@ -970,3 +970,40 @@ console.log(jane);
 
 #### Function Constructors and `.prototype`
 
+All functions have a prototype property that is only used when the `new` operator is used, as in the function constructor.
+
+The prototype property of the function is not the prototype of the function, it is the prototype of any objects created if the  function is used as a function constructor.
+
+Adding methods to an object's prototype is efficient for memory usage because that method then only exists once in memory, as opposed to as many times as the object exists.
+
+The `Object.prototype` method adds something to the prototype of the object invoking the method.
+
+```javascript
+function Person(firstname, lastname) {
+ 
+    console.log(this);
+    this.firstname = firstname;
+    this.lastname = lastname;
+    console.log('This function is invoked.');
+    
+}
+
+Person.prototype.getFullName = function() {
+    return this.firstname + ' ' + this.lastname;
+}
+
+var john = new Person('John', 'Doe');
+console.log(john);
+
+var jane = new Person('Jane', 'Doe');
+console.log(jane);
+
+Person.prototype.getFormalFullName = function() {
+    return this.lastname + ', ' + this. firstname;
+}
+
+console.log(john.getFormalFullName());
+```
+
+#### 'new' and Functions
+
