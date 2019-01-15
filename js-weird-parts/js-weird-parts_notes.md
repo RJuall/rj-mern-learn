@@ -1045,3 +1045,13 @@ Because of this, it is dangerous to use function constructors for primitive type
 
 #### Dangerous: Arrays and for...in
 
+In JS arrays the index number is the property name of the value contained at the index.
+
+The `for...in` structure will work with JS arrays because the index is a property name.
+
+But if the array prototype is changed to add functionality, those changes will appear in a `for...in` loop. Libraries can change prototypes without one knowing about it.
+
+Better to use the standard `for` loop with arrays.
+
+#### Object.create and Pure Prototypal Inheritance
+
