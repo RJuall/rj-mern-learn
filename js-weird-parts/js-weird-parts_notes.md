@@ -1165,3 +1165,11 @@ Concatenating and minifying a number of JS files can be affected by the use of `
 
 #### Learning from Other's Good Code
 
+Part of the purpose of this course is to give the student the ability to read complicated JS code and understand it.
+
+This can be used to further one's JS/CS/programming education.
+
+Making a habit of taking a look at source code is very helpful.
+
+#### Deep Dive: jQuery part 1
+
