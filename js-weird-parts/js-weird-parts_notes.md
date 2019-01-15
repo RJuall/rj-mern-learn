@@ -1013,3 +1013,29 @@ Using the convention of capitalizing functions intended to be executed via the f
 
 #### Built-In Function Constuctors
 
+JS has some function constructors built-in, such as ones that create objects that model primitive types.
+
+Examples include: `var a = new Number(4);` or `var b = new String('Hello');`
+
+Function constructors return objects, so these variables will be holding objects and not primitives.
+
+Because they are objects, they have prototypes and have methods, such as `String.length()`
+
+As an aside, when calling string methods on a string itself the JS engine 'boxes' the primitive value into a string object which has those methods, as primitive values do not have methods.
+
+One can add methods to the built-in function constructors as well, adding functionality to `String` or `Number`, for example.
+
+```javascript
+String.prototype.isLengthGreaterThan = function(limit) {
+    return this.length > limit;
+}
+
+console.log("John".isLengthGreaterThan(3));
+
+Number.prototype.isPositive = function() {
+    return this > 0;
+}
+```
+
+#### Dangerous: Built-In Function Constructors
+
