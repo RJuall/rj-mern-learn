@@ -1139,3 +1139,17 @@ Though the syntax might not be pretty, large initializations such as the above a
 
 #### Figuring Out What Something Is
 
+```javascript
+// The `typeof` function returns a string that represents the type of the variable, primitive, etc. that is passed to it
+var a = 3;
+console.log(typeof a); // "number"
+```
+
+The type of according to the `typeof` method is "object". Using `Object.prototype.toString.call(arr)` will work properly for arrays.
+
+The `instanceof` function examines the prototypal chain of an object to check if its argument is found. It checks to see if an object is an instance of a passed-in object.
+
+The `typeof` function will work as expected for functions as well, returning "function".
+
+#### Strict Mode
+
