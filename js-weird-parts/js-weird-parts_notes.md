@@ -1183,3 +1183,13 @@ jQuery is wrapped as an IIFE.
 
 The jQuery function, `$` or `jQuery`, is not a function constructor. It's just a function. This is why the `new` operator is not needed when invoking jQuery. It _is_ a function that returns a function constructor, however.
 
+#### Deep Dive: jQuery part 2
+
+jQuery includes an entirely seperate library, 'Sizzle', as its own IIFE inside of jQuery.
+
+The jQuery `jQuery.fn.init` function returns an altered empty object that the `new` operator creates.
+
+The jQuery library uses prototypical inheritance liberally to hide the use of the `new` operator and to make sure that methods are available where they need to be.
+
+#### Deep Dive: jQuery part 3
+
