@@ -1173,3 +1173,13 @@ Making a habit of taking a look at source code is very helpful.
 
 #### Deep Dive: jQuery part 1
 
+Code examined: jQuery 1.11.2
+
+jQuery is intended to smooth over the differences between browsers and manipulate the DOM.
+
+jQuery method exist on the jQuery object prototype to save memory.
+
+jQuery is wrapped as an IIFE.
+
+The jQuery function, `$` or `jQuery`, is not a function constructor. It's just a function. This is why the `new` operator is not needed when invoking jQuery. It _is_ a function that returns a function constructor, however.
+
