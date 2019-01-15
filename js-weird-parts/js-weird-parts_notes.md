@@ -1109,3 +1109,33 @@ Syntactic Sugar: A different way to type something that doesn't change how it wo
 
 #### Initialization
 
+```javascript
+var people = [
+    {
+        // The 'john' object
+        firstname: 'John',
+        lastname: 'Doe',
+        addresses: [
+            '111 Main St.',
+            '222 Third St.'
+        ]
+    },
+    {
+        // The 'jane' object
+        firstname: 'Jane',
+        lastname: 'Doe',
+        addresses: [
+            '333 Main St.',
+            '444 Fifth St.'
+        ],
+        greet: function() {
+            return 'Hello!';
+        }
+    }
+]
+```
+
+Though the syntax might not be pretty, large initializations such as the above are useful and not to be feared.
+
+#### Figuring Out What Something Is
+
