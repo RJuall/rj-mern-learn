@@ -1039,3 +1039,9 @@ Number.prototype.isPositive = function() {
 
 #### Dangerous: Built-In Function Constructors
 
+Given `var a = 3;` and `var b = Number(3);`, while `a == b` will evaluate to `true`, `a === b` will not. It is better to use literals than function constructors.
+
+Because of this, it is dangerous to use function constructors for primitive types(ish), and it is thus dangerous to use the technique of adding functionality to the primitive object prototypes. Using these features may cause trouble down the line.
+
+#### Dangerous: Arrays and for...in
+
