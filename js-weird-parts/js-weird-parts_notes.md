@@ -1203,3 +1203,7 @@ The jQuery `addClass` and `removeClass` are extended onto the prototype and retu
 
 #### TypeScript, ES6, and Transpiled Languages
 
+Transpile: Convert the syntax of one programming language to another. In this case languages that don't really ever run anywhere, but instead are processed by 'transpilers' that generate JavaScript
+
+It's important to understand what code the transpilers are created to avoid errors or unintended consequences.
+
