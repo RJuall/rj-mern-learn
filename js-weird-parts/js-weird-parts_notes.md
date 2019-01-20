@@ -1193,3 +1193,13 @@ The jQuery library uses prototypical inheritance liberally to hide the use of th
 
 #### Deep Dive: jQuery part 3
 
+jQuery-style chaining allows for methods to be chained that do nwork on the original invoking object in sequence.
+
+Method Chaining: Calling one method after another, and each method affects the parent object. So `obj.method1().method2()` where both methods end up eith a `this` variable pointing at 'obj'
+
+The jQuery `addClass` and `removeClass` are extended onto the prototype and return `this`, which returns the invoking object so that further methods can be called. This allows chaining to work.
+
+`window.jQuery = window.$ = jQuery`
+
+#### TypeScript, ES6, and Transpiled Languages
+
