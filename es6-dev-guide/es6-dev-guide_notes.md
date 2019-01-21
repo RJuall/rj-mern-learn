@@ -97,7 +97,37 @@ Much of web dev is rendering lists of data...
 
 ### The 'filter' Helper
 
+#### Selected Needed Data with Filter
+
+Creates a subset of an array and avoids mutating the original array.
+
+The iterator function must return a true or false value which decides whether an array item is added to the subset.
+
+#### More on Filtering
+
+```javascript
+var products = [
+  { name: 'cucumber', type: 'vegetable', quantity: 0, price: 1 },
+  { name: 'orange', type: 'fruit', quantity: 10, price: 15 },
+  { name: 'ground lamb', type: 'meat', quantity: 30, price: 13 },
+  { name: 'celery', type: 'vegetable', quantity: 3, price: 5 }
+];
+
+// Type is veg, qty is > 0, price < 10
+products.filter(function(product) {
+	return product.type === 'vegetable' 
+    && product.quantity > 0 
+    && product.price < 10;
+});
+```
+
+#### Choosing when to Filter
+
+The `filter` method can be used whenever there is relational data that needs to be organized, etc.
+
 ### The 'find' Helper
+
+
 
 ### The 'every' and 'some' Helper
 
