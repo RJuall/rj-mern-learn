@@ -26,9 +26,51 @@ Rapid versioning locks developers into using transpilers such as Babel.
 
 #### Array Helper Methods
 
+Array helper methods include: `forEach`, `map`, `filter`, `find`, `every`, `some`, `reduce`
 
+The array helper methods tend to work in the exact same way so knowledge of one means knowledge in the others.
+
+Mastery of these methods is incredibly helpful for web dev
+
+They mostly replace `for` loops
+
+#### the forEach Helper
+
+Arrays in JS have access to the `forEach` method which will iterate through the array. The `forEach` method will accept a function that will be executed once for every element in the array. This function is known as the iterator function.
+
+The `forEach` is significantly less logic than a `for` loop
+
+#### forEach Continued
+
+The `forEach` method will accept an anonymous function, though it does not have to be such.
+
+```javascript
+
+var nums = [1,2,3,4,5];
+var sum = 0;
+
+// This
+function adder(number) {
+  sum += number;
+}
+
+nums.forEach(adder);
+
+// Or this
+nums.forEach(function(number) {
+    sum += number;
+});
+```
+
+#### Why Use forEach?
+
+The `forEach` helper is the "swiss army knife" of array helpers. Each other array helper could be reimplemented using `forEach`
 
 ### The 'map' Helper
+
+#### The Map Helper
+
+
 
 ### The 'filter' Helper
 
