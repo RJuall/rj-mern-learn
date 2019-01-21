@@ -70,7 +70,30 @@ The `forEach` helper is the "swiss army knife" of array helpers. Each other arra
 
 #### The Map Helper
 
+```javascript
+var nums = [1,2,3,4,5];
 
+var doubleNums = nums.map(function(num) {
+	return num * 2;
+});
+```
+
+#### Map Helper Continued
+
+```javascript
+var cars = [
+  { model: 'Buick', price: 'CHEAP' },
+  { model: 'Camaro', price: 'expensive!' }
+];
+
+var prices = cars.map(function(car) {
+  return car.price;
+});
+```
+
+#### Where Map is Used
+
+Much of web dev is rendering lists of data...
 
 ### The 'filter' Helper
 
