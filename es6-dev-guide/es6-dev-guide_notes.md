@@ -380,9 +380,49 @@ team.teamSummary();
 
 #### Enhanced Object Literals
 
+Enhanced object literals are all about creating object literals using less code.
 
+Rule #1, whenever there's a key and value with the same name it can be written with just the variable name, no colon, one word
+
+Rule #2, whenver there's an object function the colon and the keyword `function` can also be omitted.
+
+```javascript
+function createBookShop(inventory) {
+ 	return {
+   	inventory,
+    inventoryValue() {
+      	return this.inventory.reduce((total, book) => total + book.price, 0);
+    },
+    priceForTitle(title) {
+      	return this.inventory.find(book => book.title === title).price;
+    }
+  }
+}
+
+```
+
+#### Wondering When to Use Enhanced Literals?
+
+```javascript
+// Not this
+function saveFile(url, data) {
+	$.ajax({ method: 'POST', url: url, data: data });
+}
+// This
+function saveFile(url, data) {
+	$.ajax({ method: 'POST', url, data });
+}
+// By convention the shortened key/val pairs should go first
+function saveFile(url, data) {
+	$.ajax({ url, data, method: 'POST' });
+}
+```
 
 ### Default Function Arguments
+
+#### Specifying Default Function Arguments
+
+
 
 ### Rest and Spread Operator
 
