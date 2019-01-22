@@ -325,7 +325,62 @@ Template strings can be much more legible, especially in complicated string conc
 
 ### Arrow Functions
 
+#### Fat Arrow Functions
+
+Instead of `const fn = function(x) {}`, arrow functions are written as `const fn = (x) => {}`
+
+If the function consists of a single return it can be written as `const fn = (x,y) => a + b;`, omitting the `return` keyword and the curly braces.
+
+#### Advanced Use of Arrow Functions
+
+The single line arrow function syntax can also work without the parenthesis around a single arguemnt (no more), as in `const fn = num => num/2;`
+
+There are a lot of rules regarding arrow functions that can be difficult to keep in mind.
+
+Arrow functions are very useful in providing function arguments to the array helper functions, i.e. `numbers.map(num => 2 * num);`
+
+#### When to Use Arrow Functions
+
+```javascript
+// The teamSummary function does not work properly
+//  because the interior `this` variable does not
+//  point to the object when it's executed.
+const team = {
+ 	members: ['Jane', 'Bill'],
+  teamName: 'Super Squad',
+  teamSummary: function() {
+    	return this.members.map(function(member) {
+      		return `${member} is on team ${this.teamName}`;
+      });
+  }
+};
+// This results in an undefined error
+team.teamSummary();
+```
+
+#### When to Use Arrow Functions Continued
+
+Arrow functions use the lexical `this`
+
+```javascript
+const team = {
+ 	members: ['Jane', 'Bill'],
+  teamName: 'Super Squad',
+  teamSummary: function() {
+    	return this.members.map((member) => {
+      		return `${member} is on team ${this.teamName}`;
+      });
+  }
+};
+// This results in the correct behavior
+team.teamSummary();
+```
+
 ### Enhanced Object Literals
+
+#### Enhanced Object Literals
+
+
 
 ### Default Function Arguments
 
