@@ -269,9 +269,40 @@ isBalanced('))((');
 
 ### Const/Let
 
+#### Variable Declarations with Const and Let
 
+In ES6 do not use `var`. Ever.
+
+`const` is for variables that will not change (cannot).
+
+`let` is for variables that are expected to change over time.
+
+```javascript
+// ES5
+var name = 'Jane';
+var title = 'Software Engineer';
+var hourlyWage = 40;
+
+// ES6
+const es6Name = 'Jane';
+let es6Title = 'Software Engineer';
+let es6HourlyWage = 40;
+
+// some time later...
+
+es6Title = 'Senior Software Engineer';
+es6HourlyWage += 20;
+```
+
+#### What Const and Let Solve
+
+Using `const` and `let` make code more legible by communicating expectations for the variables.
 
 ### Template Strings
+
+#### Template Strings
+
+
 
 ### Arrow Functions
 
