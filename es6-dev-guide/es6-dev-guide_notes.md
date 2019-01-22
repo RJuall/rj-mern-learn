@@ -448,7 +448,63 @@ createAdminUser();
 
 ### Rest and Spread Operator
 
+#### Capturing Arguments with Rest and Spread
+
+Purpose is to write less code
+
+```javascript
+// takes any number of arguments and puts them into an array
+function addNumbers(...numbers) {
+ 	return numbers.reduce((sum, number) => {
+    return sum + number;
+  }, 0);
+}
+
+// returns 21
+addNumbers(1,2,3,4,5,6);
+```
+
+#### The Rest on Rest and Spread
+
+```javascript
+const defaultColors = ['red', 'green'];
+const userFavoriteColors = ['orange', 'yellow'];
+
+// One flattened array
+[ ...defaultColors, ...userFavoriteColors ];
+// Nested array
+[ ...defaultColors, userFavoriteColors ];
+```
+
+```javascript
+// Checks to see if milk is on a shopping list, adds it if not
+function validateShoppingList(...items) {
+ 	 if (items.indexOf('milk') < 0) {
+       return ['milk', ...items];
+	 }
+	 return items;
+}
+
+validateShoppingList('oranges', 'bread', 'eggs');
+```
+
+#### Look to Use Rest and Spread Operator in this Case
+
+```javascript
+const MathLibrary = {
+  	calculateProduct(...rest) {
+     	console.log('Please use the multiply method instead');
+      return this.multiply(...rest);
+    },
+  	multiply(a,b) {
+     	return a * b; 
+    }
+};
+```
+
 ### Destructuring
+
+
 
 ### Classes
 
