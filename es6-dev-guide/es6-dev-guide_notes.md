@@ -422,7 +422,29 @@ function saveFile(url, data) {
 
 #### Specifying Default Function Arguments
 
+Default arguments can be specified for functions like so: `function fn(x='SOMETHING') {}`
 
+Default arguments pass a predefined value into the function if one is not provided.
+
+#### Uses of Defaulting Arguments
+
+```javascript
+function User(id) {
+	this.id = id;
+}
+
+function generateId() {
+	return Math.floor(Math.random() * 9999999);
+}
+// Default arguemnts can be function calls
+//  and can make code much cleaner
+function createAdminUser(user = new User(generateId())) {
+	user.admin = true;
+  return user;
+}
+
+createAdminUser();
+```
 
 ### Rest and Spread Operator
 
