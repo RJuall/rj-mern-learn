@@ -172,9 +172,58 @@ Put id in url, as in `forum.com/posts/45`, then, given the url with an id signif
 
 ### The 'every' and 'some' Helper
 
+#### A Little Every and a Lot of Some
 
+The `every` method checks to see if all the elements in an array matches some condition and returns true if ALL the elements match and false if ANY of the elements return false.
+
+#### More on Every and Some
+
+The `some` method asks if ANY (or all) of the elements in an array match some criteria and returns true if so, false if not.
+
+```javascript
+var computers = [
+  { name: 'Apple', ram: 24 },
+  { name: 'Compaq', ram: 4 },
+  { name: 'Acer', ram: 32 }
+];
+
+var allComputersCanRunProgram = true;
+var onlySomeComputersCanRunProgram = false;
+
+computers.every(function(computer) {
+  return computer.ram >= 16;
+});
+
+computers.some(function(computer) {
+  return computer.ram >= 16;
+});
+```
+
+#### Every and Some Syntax
+
+```javascript
+var names = [
+  "Albert",
+  "Bob",
+  "Edward"
+];
+
+names.every(function(name) {
+  return name.length > 4;
+});
+
+names.some(function(name) {
+  return name.length > 4;
+});
+```
+
+#### Every and Some in Practice
+
+The `every` method can be used to check if all the necessary fields in a form have inputted values or that they validate properly or the like.
 
 ### The 'reduce' Helper
+
+
 
 ### Const/Let
 
