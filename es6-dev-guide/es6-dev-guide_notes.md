@@ -223,9 +223,53 @@ The `every` method can be used to check if all the necessary fields in a form ha
 
 ### The 'reduce' Helper
 
+#### Condensing Lists with Reduce
 
+Similar to `forEach`, the `reduce` helper is very flexible and can likely copy the functionality of the other helpers if needed.
+
+#### A Touch More of Reduce
+
+```javascript
+var primaryColors = [
+  {color: 'red'},
+  {color: 'yellow'},
+  {color: 'blue'}
+];
+
+primaryColors.reduce(function(prev, primary) {
+	prev.push(primary.color);
+  return prev;
+}, []);
+```
+
+#### Ace Your Next Interview with Reduce
+
+Reduce is not just for summing numbers!
+
+```javascript
+// Balanced Parenthesis Problem
+// Are the parenthesis balanced?
+// i.e this: '(())' or '()()'
+//  and not this: '))' or '(()'
+
+function isBalanced(string) {
+  return !string.split('').reduce(function(prev, char) {
+    if (prev < 0) { return prev };
+  	if (char === '(') { return ++prev };
+    if (char === ')') { return --prev };
+    return prev;
+  }, 0);
+};
+
+isBalanced('(((');
+isBalanced('()()');
+isBalanced('(())');
+isBalanced('))((');
+```
 
 ### Const/Let
+
+
 
 ### Template Strings
 
