@@ -302,7 +302,26 @@ Using `const` and `let` make code more legible by communicating expectations for
 
 #### Template Strings
 
+Also known as template literals
 
+```javascript
+// ES5
+function getMessage() {
+	const year = new Date().getFullYear();
+  return "The year is " + year + " ES5 style.";
+}
+getMessage();
+// ES6
+function es6GetMessage() {
+  const year2 = new Date().getFullYear();
+  return `The year is ${year2} ES6 syle`;
+}
+es6GetMessage();
+```
+
+#### When to Reach for Template Strings
+
+Template strings can be much more legible, especially in complicated string concatenation situations, than using `+` to concatenate.
 
 ### Arrow Functions
 
