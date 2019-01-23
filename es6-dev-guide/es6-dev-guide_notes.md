@@ -733,4 +733,296 @@ Classes cna make inheritance chains much easier to understand
 
 ### Generators
 
+#### One Quick Thing: For...Of Loop
+
+Associated with generators
+
+```javascript
+const numbers = [1,2,3,4,5];
+
+let total = 0;
+for (let number of numbers) {
+		total += number;
+}
+```
+
+#### Introduction to Generators
+
+This is a difficult topic
+
+A generator is a function that can be entered and exited multiple times.
+
+A generator can be declared with an asterisk in between the `function` keyword and the function name.
+
+The `yield` keyword can pause a generator function.
+
+```javascript
+function * numbers() {
+		yield;
+}
+
+const gen = numbers();
+gen.next();
+gen.next();
+```
+
+#### Generators With a Short Story
+
+Simply invoking a generator doesn't execute any code, `gen.next()` must be called.
+
+```javascript
+function * shopping() {
+		// Stuff on the sidewalk
+  	
+  	// Walking down the sidewalk
+  	// Go into the store with cash
+  	const stuffFromStore = yield 'Cash';
+  
+  	// Walking back home
+  	return stuffFromStore;
+}
+
+// Stuff in the store
+const gen = shopping();
+gen.next(); // Leaving our house
+// Walked into the store
+// Walking up and down the aisles...
+// Purchase the groceries
+gen.next('Groceries'); // Leaving the store with groceries
+```
+
+#### Another Step in Our Generator Story
+
+```javascript
+function * shopping() {
+		// Stuff on the sidewalk
+  	
+  	// Walking down the sidewalk
+  	// Go into the store with cash
+  	const stuffFromStore = yield 'Cash';
+  	// Walking to laundromat
+  	const cleanClothes = yield 'laundry';
+  
+  	// Walking back home
+  	return [ stuffFromStore, cleanClothes ];
+}
+
+// Stuff in the store
+const gen = shopping();
+gen.next(); // Leaving our house
+// Walked into the store
+// Walking up and down the aisles...
+// Purchase the groceries
+gen.next('Groceries'); // Leaving the store with groceries
+gen.next('Clean Clothes');
+```
+
+#### The Big Reveal on ES6 Generators
+
+Generators work perfectly with for...of loops
+
+Generators can be used to iterate through any data structures
+
+```javascript
+function * colors() {
+	yield 'red';
+    yield 'blue';
+    yield 'green';
+}
+
+const myColors = [];
+for (let color of colors()) {
+	myColors.push(color);
+}
+myColors;
+```
+
+#### A Practical Use of ES6 Generators
+
+```javascript
+const engineeringTeam = {
+	size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineer: 'Dave'  
+}
+
+function * TeamIterator(team) {
+	yield team.lead;
+  yield team.manager;
+  yield team.engineer;
+}
+
+const names = [];
+for (let name of TeamIterator(engineeringTeam)) {
+	names.push(name);
+}
+names;
+```
+
+#### Delegation of Generators
+
+```javascript
+const testingTeam = {
+	lead: 'Amanda',
+  tester: 'Bill'
+}
+
+const engineeringTeam = {
+  testingTeam,
+	size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineer: 'Dave'
+}
+
+function * TestingTeamIterator(team) {
+	yield team.lead;
+  yield team.tester;
+}
+
+function * TeamIterator(team) {
+	yield team.lead;
+  yield team.manager;
+  yield team.engineer;
+}
+
+const names = [];
+for (let name of TeamIterator(engineeringTeam)) {
+	names.push(name);
+}
+names;
+```
+
+#### Delegation of Generators Continued
+
+```javascript
+const testingTeam = {
+	lead: 'Amanda',
+  tester: 'Bill'
+}
+
+const engineeringTeam = {
+  testingTeam,
+	size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineer: 'Dave'
+}
+
+function * TestingTeamIterator(team) {
+	yield team.lead;
+    yield team.tester;
+}
+
+function * TeamIterator(team) {
+	yield team.lead;
+    yield team.manager;
+    yield team.engineer;
+    const testingTeamGenerator = TestingTeamIterator(team.testingTeam);
+    yield * testingTeamGenerator;
+}
+
+const names = [];
+for (let name of TeamIterator(engineeringTeam)) {
+	names.push(name);
+}
+names;
+```
+
+#### Symbol.Iterator with Generators
+
+`Synbol.Iterator` tells JS how a for...of loop should handle an object
+
+ES6 has 'key interpolation' which is signified by square brackets
+
+#### Complexities of Symbol.Iterator
+
+```javascript
+const testingTeam = {
+	lead: 'Amanda',
+  tester: 'Bill',
+  [Symbol.iterator]: function * () {
+  	yield this.lead;
+    yield this.tester;
+  }
+}
+
+const engineeringTeam = {
+  testingTeam,
+	size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineer: 'Dave',
+  [Symbol.iterator]: function * () {
+  	yield this.lead;
+    yield this.manager;
+    yield this.engineer;
+    yield * this.testingTeam;
+  }
+}
+
+const names = [];
+for (let name of engineeringTeam) {
+	names.push(name);
+}
+names;
+```
+
+#### Generators with Recursion
+
+```javascript
+class Comment {
+	constructor(content, children) {
+  	this.content = content;
+    this.children = children;
+  }
+}
+
+const children = [
+	new Comment('good comment', []),
+  new Comment('bad comment', []),
+  new Comment('meh', [])
+]
+const tree = new Comment('Great post!', children);
+tree;
+```
+
+#### More on Generators with Recursion
+
+Array helpers or callbacks do not work with generators, only for...of
+
+```javascript
+class Comment {
+	constructor(content, children) {
+  	this.content = content;
+    this.children = children;
+  }
+  
+  *[Symbol.iterator]() {
+  	yield this.content;
+    for (let child of this.children) {
+    	yield * child;
+    }
+  }
+}
+
+const children = [
+	new Comment('good comment', [new Comment('I agree', [new Comment('I agree', [])])]),
+  new Comment('bad comment', []),
+  new Comment('meh', [])
+]
+const tree = new Comment('Great post!', children);
+
+const values = [];
+for (let value of tree) {
+	values.push(value);
+}
+values;
+```
+
 ### Promises and Fetch
