@@ -625,6 +625,112 @@ const objectPoints = points.map(([ x, y ]) => {
 
 ### Classes
 
+#### Introduction to Classes
+
+JS uses prototypal inheritance
+
+```javascript
+function Car(options) {
+	this.title = options.title;
+}
+
+Car.prototype.drive = function() {
+	return 'vroom';
+}
+
+const car = new Car({ title: 'Focus' });
+car;
+car.drive();
+```
+
+#### Prototypal Inheritance
+
+```javascript
+function Car(options) {
+	this.title = options.title;
+}
+
+Car.prototype.drive = function() {
+	return 'vroom';
+}
+
+function Toyota(options) {
+  Car.call(this, options);
+	this.color = options.color;
+}
+
+
+
+const car = new Car({ title: 'Focus' });
+car;
+car.drive();
+
+Toyota.prototype = Object.create(Car.prototype);
+Toyota.prototype.honk = function() {
+	return 'beep';
+}
+var toy = new Toyota({ color: 'red', title: 'Daily Driver' });
+toy.drive();
+toy.honk();
+toy.color;
+toy.title;
+```
+
+#### Refactoring with Classes
+
+```javascript
+class Car {
+  constructor({ title }) {
+  	this.title = title;
+  }
+	drive() {
+  	return 'vroom';
+  }
+}
+
+const car = new Car({title: 'Toyota'});
+car;
+car.drive();
+```
+
+#### Extending Behavior of Classes
+
+```javascript
+class Car {
+  constructor({ title }) {
+  	this.title = title;
+  }
+	drive() {
+  	return 'vroom';
+  }
+}
+
+class Toyota extends Car {
+  constructor({ title, color }) {
+    super({title});
+    this.color = color;  
+  }
+	honk() { return 'beep'; }
+}
+
+const car = new Car({ title: 'Toyota' });
+car;
+car.drive();
+'---';
+const toyota = new Toyota({ title: 'Daily Driver', color: 'red' });
+toyota;
+toyota.drive();
+toyota.honk();
+```
+
+#### When to Use Classes
+
+Classes are heavily used in React
+
+Classes can make resuable code easier to use and implement
+
+Classes cna make inheritance chains much easier to understand
+
 ### Generators
 
 ### Promises and Fetch
