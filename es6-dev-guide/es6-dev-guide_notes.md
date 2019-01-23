@@ -504,7 +504,124 @@ const MathLibrary = {
 
 ### Destructuring
 
+#### Goldmine of ES6: Destructuring
 
+```javascript
+var thing = {
+	prop1: 'Something',
+  prop2: 'Something2'
+};
+
+// const { prop1 } = thing;
+// const { prop2 } = thing;
+const { prop1, prop2 } = thing;
+
+prop1;
+prop2;
+```
+
+#### Destructuring Arguments Object
+
+```javascript
+var savedFiled = {
+	extension: '.jpg',
+  name: 'repost',
+  size: 14040
+};
+
+function fileSummary({name, extension, size}, {unit}) {
+	return `The file ${name}${extension} is of size ${size}${unit}`;
+};
+
+fileSummary(savedFiled, {unit: 'b'});
+```
+
+#### Destructuring Arrays
+
+With destructuring objects it's about getting properties.
+
+With destructuring arrays it's about getting elements.
+
+```javascript
+const companies = [
+	'Google',
+  'Facebook',
+  'Uber'
+];
+
+const [ name, name2, ...rest ] = companies;
+
+name;
+name2;
+rest;
+```
+
+#### Destructuring Arrays and Objects At the Same Time
+
+```javascript
+const companies = [
+  { name: 'Google', location: 'Mountain View' },
+  { name: 'Facebook', location: 'Menlo Park' },
+  { name: 'Uber', location: 'San Francisco' }
+];
+
+const [ { location } ] = companies; // Mountain View
+```
+
+```javascript
+const Google = {
+	locations: ['Mountain View', 'New York', 'London' ]
+};
+
+const { locations: [ location ] } = Google; // Mountain View
+```
+
+#### So... When to Use Destructuring
+
+```javascript
+function signup(username, password, email, dob, city) {
+	// Create a new user
+}
+
+// A lot of other code
+// A lot of other code
+// A lot of other code
+// A lot of other code
+// A lot of other code
+// A lot of other code
+// A lot of other code
+// A lot of other code
+
+// A lot of input args to remember with their order
+signup('myname', 'mypassword', 'myemail', 'mydob', 'mycity');
+
+const user = {
+	username: 'myname',
+  password: 'mypassword',
+  email: 'myemail',
+  dob: 'mydob',
+  city: 'mycity'
+};
+
+// Instead can use destructuring to make positioning irrelevent
+function signup( { username, password, email, dob, city } ) {};
+```
+
+#### More on When to Use Destructuring
+
+```javascript
+// Given an API result in this format
+//  change into an array of objects
+const points = [
+	[4,5],
+  [10,1],
+  [0,40]
+];
+
+const objectPoints = points.map(([ x, y ]) => {
+	return { x,y };
+});
+```
 
 ### Classes
 
