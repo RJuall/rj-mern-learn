@@ -1026,3 +1026,93 @@ values;
 ```
 
 ### Promises and Fetch
+
+#### Code Execution in Javascript
+
+JS cannot pause execution of code--not even a `sleep()` statement
+
+Because of the internet some code necessarily takes longer than other bits of code. This is the problem that promises are trying to solve.
+
+#### Terminology of Promises
+
+Unresolved: Waiting for something to finish
+
+Resolved: Something finished and it went OK
+
+Rejected: Something finished and something went bad
+
+Then: Callback for the resolved status
+
+Catch: Callback for the rejected status
+
+#### Creating Promises
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+    resolve();
+    reject();
+}) 
+```
+
+#### Then and Catch
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+    resolve();
+});
+
+promise
+    .then(() => {
+        console.log("Finally Finished!");
+    }).then(() => {
+        console.log("Also me!");
+    }).catch(() => {
+        console.log("Oh no.");
+    });
+```
+
+#### Async Code with Promises
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve();
+    }, 3000);
+});
+
+promise
+    .then(() => {
+        console.log("Finally Finished!");
+    }).then(() => {
+        console.log("Also me!");
+    }).catch(() => {
+        console.log("Oh no.");
+    });
+```
+
+#### Ajax Requests with Fetch
+
+The `fetch` function is built into the browser and causes the browser to attempt to get data from somewhere.
+
+The `fetch` function does not immediately respond with the data, it must be explicitly asked for with `response.json()` (or probably other methods)
+
+```javascript
+url = "https://jsonplaceholder.typicode.com/posts/";
+fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data));
+```
+
+Ajax libraries might still be the better option as opposed to using `fetch`
+
+#### Shortcomings of Fetch
+
+```javascript
+// Not a real url
+url = "https://jsonplaceholder.typicode.com/posts123456/";
+fetch(url)
+    .then(data => console.log(data))
+    .catch(error => console.log('BAD', error));
+// This returns a 404 error, but does not hit the catch statement
+// It will hit the catch if the domain is not found
+```
