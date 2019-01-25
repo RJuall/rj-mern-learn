@@ -94,6 +94,167 @@ The way to run code through node is to point the Node executable to a .js file w
 
 #### Conceptual Aside: Modules
 
+Modules: A reusable block of code whose existence does not accidentally impact other code. JS did not have this feature when Node was developed (it does currently have this feature).
+
+CommonJS Modules: An agreed upon standard for how code modules should be structured.
+
+Node modules developed and adhere to the commonjs module standard.
+
+#### Javascript Aside: First-Class Functions and Function Expressions
+
+First-Class Functions: Everything that can be done with other types can also be done with functions. i.e. functions can be used like strings, numbers, etc. (pass them around, set variables equal to them, put them in arrays, etc.)
+
+Expressions: A block of code that results in a value. Function expressions are possible in JS because functions are first-class.
+
+Invoke: Run a function (also 'call').
+
+```javascript
+function greet() {
+    console.log('HELLO!');
+}
+greet();
+
+// functions are first class
+function logGreeting(fn) {
+    fn();
+}
+logGreeting(greet);
+
+// function expression
+var greetMe = function() {
+    console.log('HELLO FN EXPRESSION');
+}
+greetMe();
+logGreeting(greetMe);
+
+// using a fn expression on the fly
+logGreeting(() => {
+    console.log('HELLO FROM ARROW FN')
+});
+```
+
+#### Let's Build a Module
+
+```javascript
+// greet.js
+const greet = function() {
+    console.log('HELLO!');
+}
+module.exports = greet;
+// app.js
+const greet = require('./greet');
+greet();
+```
+
+#### Javascript Aside: Objects and Object Literals
+
+Name/Value Pair: A name which maps to a value. The name may be defined more then once, but only can have one value in any given *context*. That value may be more name/value pairs.
+
+Object: A collection of name/value pairs (the simple definition).
+
+Object Literal: Name/value pairs separated by commas and surrounded by curly braces. A quick, shorthand way of creating JS objects.
+
+```javascript
+const person = {
+    firstname: 'John',
+    lastname: 'Doe',
+    greet() {
+        console.log(`Hello, ${this.firstname} ${this.lastname}`);
+    }
+}
+person.greet();
+// Can access object properties with brackets
+person['greet']();
+```
+
+#### Javascript Aside: Prototypal Inheritance and Function Constructors
+
+Inheritance: One object gets access to the properties and methods of another object.
+
+Every object in JS has a property that points to that object's prototype.
+
+The "object prototype" is the base prototype of all JS objects
+
+Function Constructors: A normal function that is used to construct objects. The `this` variable point to a new empty object and that object is returned from the function automatically.
+
+```javascript
+function Person(firstname, lastname) {
+    this.lastname = lastname;
+    this.firstname = firstname;
+
+}
+
+Person.prototype.greet = function() {
+    console.log(`Hello, ${this.firstname} ${this.lastname}`);
+}
+
+let john = new Person('John', 'Doe');
+console.log(john.firstname + ' ' + john.lastname);
+john.greet();
+let jane = new Person('Jane', 'Doe');
+jane.greet();
+
+console.log(john.__proto__);
+console.log(jane.__proto__);
+```
+
+#### Javascript Aside: By Reference and By Value
+
+Primitive: A type of data that represents a single value. Like a number or a string, not an object.
+
+Passing primitives in JS is by value
+
+Passing objects in JS is by reference
+
+```javascript
+// pass by value
+function change(b) {
+    b = 2;
+}
+
+var a = 1;
+change(a); // 1
+console.log(a);
+let c = 1;
+console.log(c); // 1
+
+// pass by reference
+function changeObj(d) {
+    d.prop1 = function() {};
+    d.prop2 = {};
+}
+
+var e = {};
+e.prop1 = {};
+console.log(e); // { prop1: {} }
+changeObj(e);
+console.log(e); // { prop1: [Function], prop2: {} }
+```
+
+#### Javascript Aside: Immediately Invoked Function Expressions (IIFEs)
+
+IIFEs are a fundamental aspect of how modules work
+
+Scope: Where in code you have access to a particular variable or function
+
+IIFEs create their own scope, which means that variables will not collide.
+
+Whatever variables are created within a function in JS are protected within their scope
+
+```javascript
+let firstname = 'Jane';
+
+(function (lastname) {
+    let firstname = 'John';
+    console.log(firstname);
+    console.log(lastname);
+})('Doe');
+
+console.log(firstname);
+```
+
+#### How Do Node Modules Really Work?: module.exports and require
+
 
 
 ### Events and the Event Emitter
