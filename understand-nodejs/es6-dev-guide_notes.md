@@ -686,6 +686,8 @@ greeter1.greet('Robert');
 
 #### Javascript Aside: Javascript is Synchronous
 
+
+
 ### HTTP and being a Web Server
 
 ### NPM: the Node Package Manager
