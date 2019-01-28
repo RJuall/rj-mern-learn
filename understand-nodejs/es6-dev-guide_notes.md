@@ -255,7 +255,118 @@ console.log(firstname);
 
 #### How Do Node Modules Really Work?: module.exports and require
 
+In loading a module or file using the `request` syntax, Node doesn't simply load the code plainly, but it wraps it.
 
+In Node 4.5, at least, the wrapper around the code (and the code as represented by `IMPORTED_CODE` is `'(function (exports, require, module, __filename, __dirname) {' + IMPORTED_CODE + '\n});'`
+
+`require` is a function that a path is passed into.
+
+`module.exports` is what the require functoin returns.
+
+This works because your code is actually wrapped in a function that is given these things as functions parameters.
+
+#### Javascript Aside: JSON
+
+JSON: Javascript Object Notation. A standard for structuring data that is inspiried by Javascript object literals. JS engines are built to understand it.
+
+#### More on `require`
+
+When the `require` function looks for a file and doesn't find one, it then looks for a folder of the same name and tries to load an `index.js` file inside of it.
+
+```javascript
+// The index.js file can be used to organized a number of .js files
+//  and returning them as an object so that they can be called 
+//  individually
+var english = require('./english');
+var spanish = require('./spanish');
+
+module.exports = {
+    english: english,
+    spanish: spanish
+};
+```
+
+Node development relies heavily on modules and `require`.
+
+#### Module Patterns
+
+```javascript
+// module.exports can be fed a function directly
+module.exports = function() {
+    console.log('HELLO WORLD');
+};
+// The module.exports object can have a function attached
+module.exports.greet = function() {
+    console.log("HELLO WORLD 2");
+}
+// This function can then be accessed by setting it to 
+//  a variable name.
+var greet2 = require('./greet2').greet;
+greet2();
+// The module.exports can instantiate a new object entirely
+//  If this is used twice in the same code it will point to
+//  the same object again, not create a new object.
+function Greetr() {
+    this.greeting = "HELLO WORLD 3";
+    this.greet = function() {
+        console.log(this.greeting);
+    }
+}
+module.exports = new Greetr();
+// If multiple different instantiations are required, 
+//  module.exports can be set as the constructor, which
+//  can then be called on to create multiple objects.
+function Greetr() {
+    this.greeting = "HELLO WORLD 4";
+    this.greet = function() {
+        console.log(this.greeting);
+    }
+}
+module.exports = Greetr;
+// Using this in code:
+var greet4 = require('./greet4');
+var grtr = new greet4();
+grtr.greet();
+// The module.export can be structured in such a way
+//  to limit access to properties and methods
+var greeting = 'HELLO WORLD 5';
+function greet() {
+    console.log(greeting);
+}
+module.exports = {
+    greet
+}
+```
+
+Node caches the results of the `require` function so that things are not instantiated multiple times, even across different JS files.
+
+Revealing Module Pattern: Exposing only the properties and methods you want via a returned object. A common and clean way to structure and protect code within modules.
+
+#### exports vs. module.exports
+
+The `exports` shorthand cannot be set to something different because then `exports` and `module.exports` will be set to different objects and the `require` function returns `module.exports`.
+
+The `exports` shorthand can, however, be mutated, as it will be changing the object that both `exports` and `module.exports` points to.
+
+The advice is to just use `module.exports`.
+
+#### Requiring Native (Core) Modules
+
+Node has an API that can be accessed or pulled in via `require` for use.
+
+Part of the `require` process is that it checks to see if the required file is the name of a native one, and uses the native file if so.
+
+Read the Node API!
+
+#### Modules and ES6
+
+ECMA2015 added modules to core JS.
+
+The syntax is something like `import * as greetr from 'greet';`
+
+#### Web Server Checklist
+
+The module system created a better way to organize code into reusable pieces.
 
 ### Events and the Event Emitter
 
