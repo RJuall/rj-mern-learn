@@ -2,7 +2,10 @@ var EventEmitter = require('events');
 var util = require('util');
 
 function Greetr() {
-	this.greeting = 'Hello world!';
+	// Analogous to a super constructor
+	// Adds the greeting property to EventEmitter
+	EventEmitter.call(this);
+	this.greeting = 'HELLO WORLD';
 }
 
 util.inherits(Greetr, EventEmitter);
@@ -15,7 +18,7 @@ Greetr.prototype.greet = function() {
 var greeter1 = new Greetr();
 
 greeter1.on('greet', function() {
-	console.log('Someone greeted!');
+	console.log('Someone GREETED');
 });
 
 greeter1.greet();

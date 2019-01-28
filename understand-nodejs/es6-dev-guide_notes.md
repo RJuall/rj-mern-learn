@@ -372,9 +372,319 @@ The module system created a better way to organize code into reusable pieces.
 
 #### Conceptual Aside: Events
 
+Event: Something that has happened in an application that can be responded to. In Node there are two different kinds of events.
 
+System events come from the C++ core of Node through a library called `libuv`
+
+Custom events are a part of the JS core and deals with events that can be created by a Node developer. These events go through the event emitter.
+
+Often system events will be wrapped into the event emitter, but they are not the same events. There are two events in Node.
+
+There is no concept of events in JS natively.
+
+#### Javascript Aside: Object Properties, First Class Functions, and Arrays
+
+```javascript
+// object properties and methods
+const obj = {
+    greet: 'Hello'
+}
+console.log(obj.greet);
+console.log(obj['greet']);
+const prop = 'greet';
+console.log(obj[prop]);
+
+// functions and arrays
+const arr = [];
+arr.push(() => {
+    console.log('Hello World 1');
+});
+arr.push(() => {
+    console.log('Hello World 2');
+});
+arr.push(() => {
+    console.log('Hello World 3');
+});
+arr.forEach(item => item());
+```
+
+#### The Node Event Emitter Part 1
+
+Event Listener: The code that responds to an event. In the case of JS, the listener will be a funciton.
+
+```javascript
+// emitter.js
+function Emitter() {
+    this.events = {};
+}
+
+// It's common JS practice to call listeners 'on'
+// This code puts functions into an array sorted
+//  into event type properties.
+Emitter.prototype.on = function(type, listener) {
+    this.events[type] = this.events[type] || [];
+    this.events[type].push(listener);
+}
+
+// The event emitter takes an event type
+//  and goes thorough the event[type] array
+//  executing its functions
+Emitter.prototype.emit = function(type) {
+    if (this.events[type]) {
+        this.events[type].forEach(listener => {
+            listener();
+        });
+    }
+}
+module.exports = Emitter;
+
+// app.js
+const Emitter = require('./emitter');
+const emtr = new Emitter();
+emtr.on('greet', () => console.log('HELLO 1'))
+emtr.on('greet', () => console.log('HELLO 2')); 
+emtr.emit('greet');
+```
+
+#### The Node Event Emitter Part 2
+
+All the documentation for the Node event emitter lives in the Node API
+
+The Node event emitter is the same concept as the one built in the previous section (Part 1)
+
+```javascript
+// Using the internal Node emitter
+const Emitter = require('events');
+const emtr = new Emitter();
+
+emtr.on('greet', () => console.log('Someone said HELLO'));
+emtr.on('greet', () => console.log('A GREETING occurred.'));
+
+console.log('HELLO');
+emtr.emit('greet');
+```
+
+Magic String: A string that has some special meaning in code. This is bad because it makes it easy for a typo to cause a bug and hard for tools to help us find it.
+
+```javascript
+// Refactoring the code to avoid 'magic strings'
+// config.js
+module.exports = {
+    events: {
+        GREET: 'greet',
+        FILESAVED: 'filesaved',
+        FILEOPENED: 'fileopened'
+    }
+}
+// app.js
+const Emitter = require('events');
+const eventConfig = require('./config').events;
+const emtr = new Emitter();
+
+emtr.on(eventConfig.GREET, () => console.log('Someone said HELLO'));
+emtr.on(eventConfig.GREET, () => console.log('A GREETING occurred.'));
+
+console.log('HELLO');
+emtr.emit(eventConfig.GREET);
+```
+
+#### Javascript Aside: Object.create and Prototypes
+
+```javascript
+// Using `Object.create` to set an object prototype
+//  as in prototypal inheritance
+const person = {
+    firstname: '',
+    lastname: '',
+    greet() {
+        return this.firstname + ' ' + this.lastname;
+    }
+}
+
+const john = Object.create(person);
+john.firstname = 'John';
+john.lastname = 'Doe';
+
+const jane = Object.create(person);
+jane.firstname = 'Jane';
+jane.lastname = 'Doe';
+
+console.log(john.greet());
+console.log(jane.greet());
+```
+
+#### Inheriting From the Event Emitter
+
+The Node `inherits` function sets a prototype in between two objects so that one can access the methods of another, which is now part of its prototypal chain.
+
+```javascript
+const EventEmitter = require('events');
+const util = require('util');
+
+function Greetr() {
+    this.greeting = 'HELLO WORLD';
+}
+
+// Creates an empty prototype object between Greetr and EventEmitter
+//  so that Greetr inherits from EventEmitter
+util.inherits(Greetr, EventEmitter);
+
+// Greetr now has access to EventEmitter methods
+//  as well as its own.
+Greetr.prototype.greet = function(data) {
+    console.log(this.greeting + ': ' + data);
+    this.emit('greet', data);
+}
+
+const greeter1 = new Greetr();
+
+greeter1.on('greet', (data) => console.log('Someone GREETED: ' + data));
+greeter1.greet('Robert');
+```
+
+Adding `EventEmitter` to an object's prototype chain is a key part of how Node operates.
+
+#### Javascript Aside: Node, ES6, and Template Literals
+
+Template Literal: A way to concatenate strings
+
+The V8 engine in Node can be different from those in browsers and can support (or not) different JS standards and features.
+
+```javascript
+let name = 'John Doe';
+let greet = 'Hello ' + name;
+// Template literal syntax in JS
+let greet2 = `Hello ${name} TEMPLATE LITERAL.`;
+
+console.log(name);
+console.log(greet);
+console.log(greet2);
+```
+
+#### Javascript Aside: .call and .apply
+
+```javascript
+const obj = {
+    name: 'John Doe',
+    greet() {
+        console.log(`HELLO ${this.name}`);
+    }
+}
+obj.greet();
+// Both call and apply are functions that call other
+//  functions.
+// The call or apply function will change what the `this` variable
+//  will be pointing to, chaning it in this case from
+//  the 'John Doe' object to the newly-created 'Jane Doe'
+//  object.
+obj.greet.call({ name: 'Jane Doe' });
+// call and apply work exactly the same, except that
+//  in the case when there are arguments to be passed
+//  to the function. call accepts function arguments as individual
+//  arguments separated by commas. apply accepts them as
+//  a single array.
+obj.greet.apply({ name: 'Todd Doe' });
+```
+
+#### Inheriting From the Event Emitter Part 2
+
+```javascript
+var EventEmitter = require('events');
+var util = require('util');
+
+function Greetr() {
+	// Analogous to a super constructor
+	// Adds the greeting property to EventEmitter
+	EventEmitter.call(this);
+	this.greeting = 'HELLO WORLD';
+}
+
+util.inherits(Greetr, EventEmitter);
+
+Greetr.prototype.greet = function() {
+	console.log(this.greeting);
+	this.emit('greet');
+}
+
+var greeter1 = new Greetr();
+
+greeter1.on('greet', function() {
+	console.log('Someone GREETED');
+});
+
+greeter1.greet();
+```
+
+#### Javascript Aside: ES6 Classes
+
+Syntactic Sugar: A feature that only changes how you type something, but nothing changes under the hood. It is still important to know what's going on under the hood, however, so one isn't operating under a flawed conception of how things work.
+
+ES6 classes are syntactic sugar, they do not change anything about how JS prototypal inheritance works.
+
+JS prototypal inheritance is not the same as classes in languages such as Java or C#.
+
+```javascript
+'use strict';
+
+class Person {
+    // Function constructor
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    // Methods are put on the prototype
+    greet() {
+        console.log(`Hello, ${this.firstname} ${this.lastname}`);
+    }
+}
+
+var john = new Person('John', 'Doe');
+john.greet();
+
+var jane = new Person('Jane', 'Doe');
+jane.greet();
+
+console.log(john.__proto__); // Person {}
+console.log(jane.__proto__); // Person {}
+console.log(john.__proto__ === jane.__proto__); // true
+```
+
+#### Inheriting from the Event Emitter Part 3
+
+```javascript
+// Refactoring Greetr code to use classes, template literals,
+//  and export.
+// greetr.js
+'use strict';
+const EventEmitter = require('events');
+module.exports = class Greetr extends EventEmitter {
+	constructor() {
+		super();
+		this.greeting = 'HELLO WORLD';
+	}
+	greet(data) {
+		console.log(`${this.greeting}: ${data}`);
+		this.emit('greet', data);
+	}
+}
+// app.js
+'use strict';
+
+var EventEmitter = require('events');
+const Greetr = require('./greetr');
+
+var greeter1 = new Greetr();
+
+greeter1.on('greet', function(data) {
+	console.log('Someone GREETED: ' + data);
+});
+
+greeter1.greet('Robert');
+```
 
 ### Asynchronous Code, libuv, The Event Loop, Streams, Files, and more...
+
+#### Javascript Aside: Javascript is Synchronous
 
 ### HTTP and being a Web Server
 
