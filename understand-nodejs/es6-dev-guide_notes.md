@@ -370,6 +370,10 @@ The module system created a better way to organize code into reusable pieces.
 
 ### Events and the Event Emitter
 
+#### Conceptual Aside: Events
+
+
+
 ### Asynchronous Code, libuv, The Event Loop, Streams, Files, and more...
 
 ### HTTP and being a Web Server
