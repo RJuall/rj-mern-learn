@@ -686,6 +686,126 @@ greeter1.greet('Robert');
 
 #### Javascript Aside: Javascript is Synchronous
 
+Asynchronous: More than one process running simultaneously. Node does things asynchronously, V8 does not.
+
+Synchronous: Once process executing at a time. JS is synchronous.
+
+#### Conceptual Aside: Callbacks
+
+Callbacks: A function passed to some other function, which we assume will be invoked at some point. The function 'calls back' invoking the function you give it when it is done doing its work.
+
+#### libuv, The Event Loop, and Non-Blocking Asynchronous Code
+
+Non-Blocking: Doing other things without stopping your program from running. This is made possible by Node's asynchronous nature.
+
+`libuv` is the C++ module that allows for asynchonous code in V8. It runs an event loop that constantly scans for events occurring, letting JS know when events have completed.
+
+`libuv` is a multi-platform support library for asynchronous I/O
+
+#### Conceptual Aside: Streams and Buffers
+
+Buffer: A temporary holding spot for data being moved from one place to another. Intentionally limited in size.
+
+Stream: A sequence of data made available over time. Pieces of data that eventually combine into a whole.
+
+#### Conceptual Aside: Binary Data, Character Sets, and Encoding
+
+Binary Data: Data stored in binary (0's and 1's). The core of the math that computers are based on. Each one or zero is called a 'bit' or 'binary digit'.
+
+Everything that's stored in a computer must be represented as a binary number.
+
+Character Set: A representation of characters as numbers. Each character gets a number. Unicode and ASCII are character sets.
+
+Character Encoding: How characters are stored in binary. The numbers (or code points) are converted and stored in binary.
+
+UTF-8 is the most popular character encoding on the internet.
+
+JS is not very good with binary encoding, Node js goes a long way towards adding that functionality to JS.
+
+#### Buffers
+
+The `buffer` object is written in the C++ side of Node and made available in JS.
+
+The `buffer` object contains a lot of methods for handling binary data.
+
+The buffer holds raw binary data.
+
+Relatively rare that the buffer is accessed directly.
+
+```javascript
+const buf = new Buffer('Hello', 'utf8');
+console.log(buf);
+console.log(buf.toString());
+console.log(buf.toJSON());
+console.log(buf[2]);
+
+buf.write('wo');
+console.log(buf.toString());
+/*
+<Buffer 48 65 6c 6c 6f>
+Hello
+{ type: 'Buffer', data: [ 72, 101, 108, 108, 111 ] }
+108
+wollo
+*/
+```
+
+#### Javascript Aside: ES6 Typed Arrays
+
+Byte: 8 bits.
+
+ES6 Javascript got a new feature `ArrayBuffer` that can be used to interface with binary data.
+
+```javascript
+const buffer = new ArrayBuffer(8);
+const view = new Int32Array(buffer);
+view[0] = 5;
+view[1] = 15;
+console.log(view);
+```
+
+#### Javascript Aside: Callbacks
+
+```javascript
+function greet(callback) {
+    console.log('HELLO WORLD');
+    callback();
+}
+greet(() => console.log('CALLBACK HAPPENED'));
+greet(() => console.log('DIFFERENT CALLBACK'));
+```
+
+#### Files and fs
+
+Error-First Callback: Callbacks take an error object as their first parameter. `null` if no error, otherwise will contain an object defining the error. This is a standard so we know in what order to place our parameters for our callbacks.
+
+Try to use asynchronous code when possible. It will make code more performant.
+
+```javascript
+const fs = require('fs');
+// readFileSync is synchronous, blocking
+const greet = fs.readFileSync(__dirname + '/greet.txt', 'utf8');
+console.log(greet);
+// readFile is asynchronous and accepts a callback
+const greet2 = fs.readFile(__dirname + '/greet.txt', (err, data) => {
+    console.log(data);
+    // <Buffer 48 65 6c 6c 6f 20 77 6f 72 6c 64 21>
+});
+const greet3 = fs.readFile(__dirname + '/greet.txt', 'utf8', (err, data) => {
+    console.log(data);
+    // Hello world!
+});
+console.log('DONE'); // logs before async callbacks
+```
+
+#### Streams
+
+Chunk: A piece of data being sent through a stream. Data is split in 'chunks' and streamed.
+
+Streams are EventEmitters (they inherit from EventEmitter).
+
+Abstract (Base) Class: A type of constructor you never work directly with, but inherit from. We create new custom objects which inherit from the abstract base class.
+
 
 
 ### HTTP and being a Web Server
