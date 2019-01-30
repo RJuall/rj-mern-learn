@@ -804,11 +804,59 @@ Chunk: A piece of data being sent through a stream. Data is split in 'chunks' an
 
 Streams are EventEmitters (they inherit from EventEmitter).
 
+Streams are an abstract class.
+
 Abstract (Base) Class: A type of constructor you never work directly with, but inherit from. We create new custom objects which inherit from the abstract base class.
 
+The prototype chain for streams is something like: EventEmitter->Stream->StreamType->CustomStream
 
+```javascript
+var fs = require('fs');
+
+var readable = fs.createReadStream(__dirname + '/greet.txt', { encoding: 'utf8', highWaterMark: 16 * 1024 });
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+
+readable.on('data', function(chunk) {
+	console.log(chunk.length);
+	writable.write(chunk);
+});
+```
+
+#### Conceptual Aside: Pipes
+
+Pipe: Connecting two streams by writing to one stream what is being read from another. In Node you pipe from a Readable stream to a Writeable stream.
+
+#### Pipes
+
+Method Chaining: A method returns an object so we can keep calling more methods. Sometimes it returns the parent object (called 'cascading') and sometimes some other object.
+
+```javascript
+var fs = require('fs');
+var zlib = require('zlib');
+
+var readable = fs.createReadStream(__dirname + '/greet.txt');
+
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+
+var compressed = fs.createWriteStream(__dirname + '/greet.txt.gz');
+
+var gzip = zlib.createGzip();
+
+readable.pipe(writable);
+readable.pipe(gzip).pipe(compressed);
+```
+
+#### Web Server Checklist
+
+JS can now deal with files via streams.
+
+JS can now deal with work that takes a long time due to asynchronous code, which will allow the program to continue even as tasks that take a while execute.
 
 ### HTTP and being a Web Server
+
+#### Conceptual Aside: TCP/IP
+
+
 
 ### NPM: the Node Package Manager
 
