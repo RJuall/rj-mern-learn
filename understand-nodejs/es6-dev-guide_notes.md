@@ -856,9 +856,174 @@ JS can now deal with work that takes a long time due to asynchronous code, which
 
 #### Conceptual Aside: TCP/IP
 
+Protocol: A set of rules two side agree on to use when communicating. Both the client and server are programmed to understand and use that particular set of rules. It's similar to two people from different countries agreeing on a language to speak in.
 
+The client/server model needs a communication protocol so that the two sides of the equation can speak to each other. That protocol is TCP/IP.
+
+HTTP, FTP, SMTP are themselves protocols
+
+TCP === 'Transmission Control Protocol'
+
+IP === 'Internet Protocol'
+
+TCP is the protocol for sending information down a network in packets.
+
+IP is the protocol for addressing nodes of a network.
+
+The concept of websockets is to have sockets between nodes that do not close so that data can be transferred continually, unlike a normal socket.
+
+TCP operates as a stream and is seen as such by Node.
+
+#### Conceptual Aside: Addresses and Ports
+
+Port: Once a computer receives a packet, how it knows what program to send it to. When a program is setup on the operating system to receive packets from a particular port, it is said that the program is 'listening' to that port.
+
+Node is assigned a port number so that when a request is made to a web server the server will know that Node is the intended target.
+
+#### Conceptual Aside: HTTP
+
+HTTP: HyperText Transfer Protocol. A set of rules (and a format) for data being transferred on the web. It's a format of various defining data being transferred via TCP/IP.
+
+```
+// REQUEST
+CONNECT www.google.com:443 HTTP/1.1
+Host: www.google.com
+Connection: keep-alive
+// RESPONSE
+HTTP/1.1 200 OK
+Content-Length: 44
+Content-Type: text/html
+```
+
+MIME Type: A standard for specifying the type of data being sent. Stands for 'Multipurpose Internet Mail Extensions'. i.e. application/json, text/html, image/jpeg.
+
+#### http_parser
+
+The `http-parser` code is an independent block of C code that is embedded in Node.
+
+This code is then bound to the Node HTTP server.
+
+The `createServer` method takes a listener which tells the server what to do once a HTTP request is detected.
+
+#### Let's Build a Web Server in Node
+
+```javascript
+const http = require('http');
+
+http.createServer(function(req, res) {
+
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('HELLO WORLD\n');
+
+}).listen(1337, '127.0.0.1');
+```
+
+#### Outputting HTML and Templates
+
+Template: Text designed to be the basis for final text or content after being processed. There's usually some specific template language, so the template system knows how to replace the placeholders with values.
+
+```javascript
+var http = require('http');
+var fs = require('fs');
+
+http.createServer(function(req, res) {
+    
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
+    var message = "TEMPLATE WORLD";
+    html = html.replace('{Message}', message);
+    res.end(html);
+    
+}).listen(1337, '127.0.0.1');
+```
+
+#### Streams and Performance
+
+```javascript
+var http = require('http');
+var fs = require('fs');
+
+http.createServer(function(req, res) {
+    
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    // This pipes the input stream directly to the response
+    //  object, ultimately rendering the web page in chunks
+    //  so as to allow for many requests on the same assets
+    //  and improving performance.
+    fs.createReadStream(__dirname + '/index.htm').pipe(res);
+    
+}).listen(1337, '127.0.0.1');
+```
+
+Use streams wherever possible and if not using streams, know why not to.
+
+#### Conceptual Aside: APIs and Endpoints
+
+API: Application Programming Interface. A set of tools for building a software application. On the web the tools are usually made available via a set of URLs which accept and send only data via HTTP and TCP/IP.
+
+Endpoint: One URL in a web API. Sometimes that endpoint (URL) does multiple things by making choices based on the HTTP request headers.
+
+#### Outputting JSON
+
+Serialize: Translating an object into a format that can be stored or transferred. JSON, CSV, XML, and others are popular. 'Deserialize' is the opposite (converting the format back into an object).
+
+```javascript
+const http = require('http');
+const fs = require('fs');
+
+http.createServer(function(req, res) {
+
+    res.writeHead(200, { 'Content-Type': 'application/json'});
+    const obj = {
+        firstname: 'John',
+        lastname: 'Doe'
+    };
+    res.end(JSON.stringify(obj));
+}).listen(1337, '127.0.0.1');
+```
+
+#### Routing
+
+Routing: Mapping HTTP requests to cntent. Whether actual files exist on the server or not.
+
+```javascript
+var http = require('http');
+var fs = require('fs');
+
+http.createServer(function (req, res) {
+
+  if (req.url === '/') {
+    fs.createReadStream(__dirname + '/index.htm').pipe(res);
+  }
+
+  else if (req.url === '/api') {
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    var obj = {
+      firstname: 'John',
+      lastname: 'Doe'
+    };
+    res.end(JSON.stringify(obj));
+  } 
+
+  else {
+    res.writeHead(404);
+    res.end();
+  }
+
+}).listen(1337, '127.0.0.1');
+```
+
+#### Web Server Checklist
+
+JS now has the ability to communicate over the internet.
+
+JS also has the ability to accept requests and send responses (in the standard format).
 
 ### NPM: the Node Package Manager
+
+#### Conceptual Aside: Packages and Package Managers
+
+
 
 ### Express
 
