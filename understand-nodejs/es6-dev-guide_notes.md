@@ -1023,9 +1023,61 @@ JS also has the ability to accept requests and send responses (in the standard f
 
 #### Conceptual Aside: Packages and Package Managers
 
+NPM: Node Package Manager
 
+Package: In software, a package is code. Managed and maintained with a package management system.
+
+Package Management System: Software that automates installing and updating packages. Deals with what version you have or need, and manages dependencies.
+
+Dependency: Code that another set of code depends on to function. If you use that code in your app, it is a dependency. Your app depends on it.
+
+#### Conceptual Aside: Semantic Versioning (semver)
+
+Versioning: Specifying what versio of a set of code this is so others can track if a new version has come out. This allows to watch for new features, or to watch for 'breaking changes'.
+
+The word 'semantic' implies that something conveys meaning.
+
+For example: Major.Minor.Patch format => `1.7.3`
+
+Patch versions fix errors in the code, minor versions add new features but will not disrupt compatability, major versions imply big changes that may affect code bases.
+
+semver.org
+
+#### NPM and the NPM Registry: Other People's Code
+
+There's a lot of good information about each NPM package on the NPM website that can help users understand each package and how to use it.
+
+#### init, nodemon, and package.json Part 1
+
+Before installing NPM packages to a project, it must be set up so that the packages are tracked properly in the project.
+
+Every Node program has an entry point. The entry point for this course has been `app.js`
+
+`npm i moment --save` installs and saves the application dependency to the package.json file
+
+In the package.json, a NPM package followed by a version number preceded by a carat, i.e. `^2.3.4` indicates that the package can be subsequently updated to any minor version. If it's preceded by a tilde, i.e. `~2.3.4`, that indicates that only a patch change is acceptable.
+
+The Node `require` function will look for package names where it expects to find the `node_module` folder so that the specific directory information does not have to be written out in a Node application, i.e. `const a = require('thisPackage');` instead of `const a = require('./node_modules/thisPackage')'`
+
+#### init, nodemon, and package.json Part 2
+
+The `npm install thisPackage --save-dev` command will track a package as a dependency for application development only, which is useful for tools such as testing tools.
+
+The `-g` flag on the `npm` command installs a package globally, as in not specific to a project.
+
+`npm update` will check to see if there are updates to any of the project dependencies and download the updates if found.
+
+The `nodemon` package is a wrapper for Node, executes scripts as Node does, but then waits for the script to change and re-running it if changes are detected.
+
+#### Using Other People's Code
+
+The packages on NPM are just other people's code. Be careful what you use and YMMV.
 
 ### Express
+
+#### Installing Express and Making it Easier to Build a Web Server
+
+
 
 ### JavaScript, JSON, and Databases
 
