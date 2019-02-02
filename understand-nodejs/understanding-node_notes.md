@@ -1077,6 +1077,89 @@ The packages on NPM are just other people's code. Be careful what you use and YM
 
 #### Installing Express and Making it Easier to Build a Web Server
 
+Express encapsulates a lot of Node code, making applications easier to write. Much (or all) of what express does can be written in Node without the express package.
+
+Environment Variables: Global variables specific to the environment (server) our code is living in. Different servers can have different variable settings and we can access those values in code.
+
+HTTP Method: Specifies the type of action the request wishes to make. GET, POST, DELETE, and others. Also called verbs.
+
+```javascript
+const express = require('express');
+const app = express();
+const port = process.env.port || 3000;
+
+app.get('/person/:id', function(req, res) {
+    res.send('<html><head></head><body><h1>HELLO WORLD</h1></body></html');
+});
+
+app.get('/api', function(req, res) {
+    res.json({ firstname: 'John', lastname: 'Doe' });
+});
+
+app.listen(port);
+```
+
+#### Routing
+
+```javascript
+const express = require('express');
+const app = express();
+const port = process.env.port || 3000;
+
+app.get('/', function(req, res) {
+    res.send('<html><head></head><body><h1>HELLO WORLD</h1></body></html');
+});
+
+// ':id' indicates a variable to Express
+app.get('/person/:id', function(req, res) {
+    res.send('<html><head></head><body><h1>PERSON: ' + req.params.id + '</h1></body></html');
+});
+
+app.get('/api', function(req, res) {
+    res.json({ firstname: 'John', lastname: 'Doe' });
+});
+
+app.listen(port);
+```
+
+#### Static Files and Middleware
+
+Middleware: Code that sits between two layers of software. In the case of Express, sitting between the request and the response.
+
+Static: Not dynamic. Files that are not processed by code in any way. i.e. HTML, CSS, and image files are static files.
+
+```javascript
+var express = require('express');
+var app = express();
+
+var port = process.env.PORT || 3000;
+
+// Express handling middleware
+app.use('/assets', express.static(__dirname + '/public'));
+app.use('/', function(req, res, next) {
+	console.log('Request URL: ' + req.url);
+	next();
+});
+
+app.get('/', function(req, res) {
+	res.send('<html><head><link href=/assets/style.css type=text/css rel=stylesheet /></head><body><h1>Hello world!</h1></body></html>');
+});
+
+app.get('/person/:id', function(req, res) {
+	res.send('<html><head></head><body><h1>Person: ' + req.param.id + '</h1></body></html>');
+});
+
+app.get('/api', function(req, res) {
+	res.json({ firstname: 'John', lastname: 'Doe' });
+});
+
+app.listen(port);
+```
+
+#### Templates and Template Engines
+
+Express is an "unopinionated" web framework.
+
 
 
 ### JavaScript, JSON, and Databases
