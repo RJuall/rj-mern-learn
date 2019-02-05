@@ -1269,9 +1269,13 @@ Breaking up an application's code becomes essential for larger web application p
 
 One app structure involves a `bin` folder for server setup, `public` for static public-facing files, `routes` for express routing, `views` for different pages, and an `app.js` entry point.
 
-A `controller` folder handles code that lives between the app and its data.
+A `controller` folder can separate code that lives between the app and its data.
 
 ### JavaScript, JSON, and Databases
+
+#### Conceptual Aside: Relational Databases and SQL
+
+
 
 ### The MEAN Stack
 
