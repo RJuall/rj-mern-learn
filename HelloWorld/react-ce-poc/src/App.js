@@ -5,7 +5,7 @@ import AceEditor from 'react-ace';
 import logo from './logo.svg';
 import 'brace/mode/haskell';
 import 'brace/theme/solarized_dark';
-import { XTerm, Terminal } from 'xterm';
+import { XTerm, Terminal } from 'git xterm';
 import { ResizableBox } from 'react-resizable';
 import * as throttle from 'lodash.throttle';
 import './App.css';
