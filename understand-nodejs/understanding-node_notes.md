@@ -1275,8 +1275,139 @@ A `controller` folder can separate code that lives between the app and its data.
 
 #### Conceptual Aside: Relational Databases and SQL
 
+Tabular data in JS can be thought of as JS objects (key/val pairs)
 
+#### Node and MySQL
+
+```javascript
+var express = require('express');
+var app = express();
+const mysql = require('mysql');
+
+var apiController = require('./controllers/apiController');
+var htmlController = require('./controllers/htmlController');
+
+var port = process.env.PORT || 3000;
+
+app.use('/assets', express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
+
+app.use('/', function (req, res, next) {
+	console.log('Request Url:' + req.url);
+
+	const con = mysql.createConnection({
+		host: "localhost",
+		user: "test",
+		password: "test",
+		database: "addressbook"
+	});
+
+	con.query('SELECT People.ID, Firstname, Lastname, Address' +
+		'FROM People INNER JOIN PersonAddresses ON' +
+		'People.ID = PersonAddresses.PersonID INNER JOIN' +
+		'Addresses ON Person Addresses.AddressID = Addresses.ID',
+		function(err, rows) {
+			if(err) throw err;
+			console.log(rows);
+		}
+	);
+
+	next();
+});
+
+htmlController(app);
+
+apiController(app);
+
+app.listen(port);
+```
+
+What's coming back from databases in a Node application is going to be an array of JS objects (most of the time?)
+
+#### Conceptual Aside: NoSQL and Documents
+
+NoSQL: A variety of technologies that are alternatives to tables and SQL. One of those types is a document database. MongoDB is one of those.
+
+Data is stored with its structure and its data simultaneously. Thus, the 'schema' is flexible.
+
+#### MongoDB and Mongoose
+
+```javascript
+var express = require('express');
+var app = express();
+const mongoose = require('mongoose');
+
+mongoose.connect('LOREM');
+
+const Schema = mongoose.Schema;
+
+const personSchema = new Schema({
+	firstname: String,
+	lastname: String,
+	address: String
+});
+
+// Essentially a function constructor
+const Person = mongoose.model('Person', personSchema);
+
+// Instantiating the Mongoose object
+const john = Person({
+	firstname: "John",
+	lastname: "Doe",
+	address: "555 Main St."
+});
+
+// Save 'john' to the database
+john.save(function(err) {
+	if (err) throw err;
+	console.log("Person Saved!");
+});
+
+var apiController = require('./controllers/apiController');
+var htmlController = require('./controllers/htmlController');
+
+var port = process.env.PORT || 3000;
+
+app.use('/assets', express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
+
+app.use('/', function (req, res, next) {
+	console.log('Request Url:' + req.url);
+	// Get all the users
+	Person.find({}, function(err, users) {
+		if (err) throw err;
+		// Object of all the users
+		console.log(users);
+	})
+
+	next();
+});
+
+htmlController(app);
+
+apiController(app);
+
+app.listen(port);
+```
+
+#### Web Server Checklist
+
+With the ability to deal with databases, now we see that Node is a complete and robust web server technology.
 
 ### The MEAN Stack
+
+#### MongoDB, Express, AngularJS, and NodeJS
+
+Stack: The combination of all technologies used to build a piece of software. Your database system, your server side code, your client side code, and everything else.
+
+MEAN stack: MongoDB, Express, Angular, Node
+
+AngularJS: JS framework for managing code and UI in the browser.
+
+MEAN stack is full-stack JS (ish).
+
+
 
 ### Let's Build an App! (In Record Time)
