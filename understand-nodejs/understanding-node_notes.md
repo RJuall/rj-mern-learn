@@ -1408,6 +1408,86 @@ AngularJS: JS framework for managing code and UI in the browser.
 
 MEAN stack is full-stack JS (ish).
 
+#### AngularJS: Managing the Client
 
+For the most part, browsers are written in C++.
+
+Browsers also have JS engines embedded in them and give them access to extra features.
+
+DOM: The structure browsers use to store and manage web pages. Stands for "Document Object Model." Browsers give the JS engine the ability to manipulate the DOM.
+
+Browsers construct the DOM using the html passed to it as a hierarchical tree structure.
+
+JS passed to the browser has the ability to affect the DOM directly via the browser's JS engine.
+
+DOM manipulation makes the web page dynamic.
+
+Different browsers can have different expectations for DOM manipulation, meaning that production code can have a lot of extra code to make it run on any reasonable browser.
+
+Front-end frameworks, such as Angular, can help to limit the extra compatability code.
+
+#### AngularJS: Managing the Client (Part 2)
+
+JS in a script tag of an html document isn't processed and isn't involved with Node in any way.
+
+#### AngularJS: Managing the Client (Part 3)
+
+```html
+<html ng-app="TestApp">
+	<head>
+		<title>The MEAN stack</title>
+    	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+	</head>
+	<body ng-controller="MainController as vm">
+		<input type="text" ng-model="vm.message" />
+		<br />
+		{{ vm.message }}
+		<br />
+		<ul>
+			<li ng-repeat="person in vm.people">
+				{{ person.name }}
+			</li>
+		</ul>
+		<script src="/assets/js/app.js"></script>
+	</body>
+</html>
+```
+
+```javascript
+angular.module('TestApp', []);
+
+angular.module('TestApp')
+    .controller('MainController', ctrlFunc);
+
+function ctrlFunc() {
+    this.message = 'Hello';
+    this.people = [
+        {
+            name: 'John Doe'
+        },
+        {
+            name: 'Jane Doe'
+        },
+        {
+            name: 'Jim Doe'
+        }
+    ]
+}
+```
+
+#### Conceptual Aside: Angular 1, Angular 2, React, and More...
+
+It's all just JS
+
+The individual technologies in stacks aren't linked in some inseperable way. Use whatever tech makes the most sense for the project.
+
+#### Working with the Full Stack (and Being a Full Stack Developer)
+
+Full Stack Developer: A developer who knows all the pieces of a software stack.
+
+One of the benefits of being a full stack developer is the ability to conceptualize all of an application and really know what code is responsible for what actions, etc.
 
 ### Let's Build an App! (In Record Time)
+
+#### NodeTodo: Software Requirements
+
