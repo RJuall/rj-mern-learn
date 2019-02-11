@@ -1491,3 +1491,64 @@ One of the benefits of being a full stack developer is the ability to conceptual
 
 #### NodeTodo: Software Requirements
 
+To-Do List
+
+#### Initial Setup
+
+```javascript
+const express = require('express');
+const app = express();
+
+const port = process.env.PORT || 3000;
+
+app.use('/assets', express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
+
+app.listen(port);
+```
+
+#### Setting up Mongo and Mongoose
+
+```javascript
+// config.json
+{
+    "uname": "####",
+    "pwd": "####"
+}
+// index.js
+const configValues = require('./config');
+
+module.exports = {
+    getDbConnectionString: function() {
+        return 'mongodb+srv://' + configValues.uname + ':' + configValues.pwd + 
+            '@node-todo-sample-jamhw.mongodb.net/test?retryWrites=true';
+    }
+}
+// todoModel.js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const todoSchema = new Schema({
+    username: String,
+    todo: String,
+    isDone: Boolean,
+    hasAttachment: Boolean
+});
+
+const Todos = mongoose.model('Todos', todoSchema);
+module.exports = Todos;
+// app.js
+```
+
+#### Adding Seed Data
+
+Seed: Adding initial data to a database
+
+mLab is different! Not worth trying to fix this todo...
+
+#### Creating our API
+
+Nvm.
+
+### End of Course!
